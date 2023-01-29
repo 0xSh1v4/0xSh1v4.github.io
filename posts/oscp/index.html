@@ -3,53 +3,25 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2">
 <meta name=robots content="noodp">
-<title>OSCP - 0xSh1v4 Blog</title><meta name=author content>
+<title>How I cleared OSCP in my First Attempt - 0xSh1v4 Blog</title><meta name=author content>
 <meta name=author-link content>
-<meta name=description content="This is the test post
-<?php
-
-echo &#34;hello world&#34;;
-
-?>
-
-"><meta name=keywords content="infosec"><meta itemprop=name content="OSCP">
-<meta itemprop=description content="This is the test post
-<?php
-
-echo &#34;hello world&#34;;
-
-?>
-
-"><meta itemprop=datePublished content="2022-12-26T03:26:27+01:00">
+<meta name=description content="In this blog, I am going to share my experience on OSCP and provide you guys some tip which might be useful for those who are preparaing for their OSCP exam. Since I took the recent OSCP exam which Includes the Active Directory structure as well. I would share some tips on this part as well."><meta name=keywords content="oscp"><meta itemprop=name content="How I cleared OSCP in my First Attempt">
+<meta itemprop=description content="In this blog, I am going to share my experience on OSCP and provide you guys some tip which might be useful for those who are preparaing for their OSCP exam. Since I took the recent OSCP exam which Includes the Active Directory structure as well. I would share some tips on this part as well."><meta itemprop=datePublished content="2022-12-26T03:26:27+01:00">
 <meta itemprop=dateModified content="2022-12-26T03:26:27+01:00">
-<meta itemprop=wordCount content="10">
-<meta itemprop=keywords content="infosec,"><meta property="og:title" content="OSCP">
-<meta property="og:description" content="This is the test post
-<?php
-
-echo &#34;hello world&#34;;
-
-?>
-
-">
+<meta itemprop=wordCount content="1479">
+<meta itemprop=keywords content="infosec,oscp,offsec,"><meta property="og:title" content="How I cleared OSCP in my First Attempt">
+<meta property="og:description" content="In this blog, I am going to share my experience on OSCP and provide you guys some tip which might be useful for those who are preparaing for their OSCP exam. Since I took the recent OSCP exam which Includes the Active Directory structure as well. I would share some tips on this part as well.">
 <meta property="og:type" content="article">
-<meta property="og:url" content="http://example.org/posts/oscp/"><meta property="article:section" content="posts">
+<meta property="og:url" content="https://0xsh1v4.github.io/posts/oscp/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2022-12-26T03:26:27+01:00">
 <meta property="article:modified_time" content="2022-12-26T03:26:27+01:00">
 <meta name=twitter:card content="summary">
-<meta name=twitter:title content="OSCP">
-<meta name=twitter:description content="This is the test post
-<?php
-
-echo &#34;hello world&#34;;
-
-?>
-
-">
-<meta name=application-name content="FixIt">
-<meta name=apple-mobile-web-app-title content="FixIt"><meta name=theme-color data-light=#f8f8f8 data-dark=#252627 content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
+<meta name=twitter:title content="How I cleared OSCP in my First Attempt">
+<meta name=twitter:description content="In this blog, I am going to share my experience on OSCP and provide you guys some tip which might be useful for those who are preparaing for their OSCP exam. Since I took the recent OSCP exam which Includes the Active Directory structure as well. I would share some tips on this part as well.">
+<meta name=application-name content="0xSh1v4">
+<meta name=apple-mobile-web-app-title content="0xSh1v4"><meta name=theme-color data-light=#f8f8f8 data-dark=#252627 content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=canonical href=http://example.org/posts/oscp/><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"OSCP","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"http:\/\/example.org\/posts\/oscp\/"},"genre":"posts","keywords":"infosec","wordcount":10,"url":"http:\/\/example.org\/posts\/oscp\/","datePublished":"2022-12-26T03:26:27+01:00","dateModified":"2022-12-26T03:26:27+01:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"Author"},"description":""}</script></head>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=canonical href=https://0xsh1v4.github.io/posts/oscp/><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"How I cleared OSCP in my First Attempt","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/0xsh1v4.github.io\/posts\/oscp\/"},"genre":"posts","keywords":"infosec, oscp, offsec","wordcount":1479,"url":"https:\/\/0xsh1v4.github.io\/posts\/oscp\/","datePublished":"2022-12-26T03:26:27+01:00","dateModified":"2022-12-26T03:26:27+01:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"Siva Rajendran"},"description":""}</script></head>
 <body data-header-desktop=sticky data-header-mobile=auto><script>(window.localStorage?.getItem('theme')?localStorage.getItem('theme')==='dark':'auto'==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:'auto'==='dark')&&document.body.setAttribute('data-theme','dark')</script><div class=wrapper><header class="desktop animate__faster" id=header-desktop>
 <div class=header-wrapper>
 <div class=header-title>
@@ -62,7 +34,7 @@ echo &#34;hello world&#34;;
 <a class=menu-link href=/>Certifications</a><i class="dropdown-icon fa-solid fa-chevron-down" aria-hidden=true></i>
 <ul class=sub-menu>
 <li class="menu-item active">
-<a class=menu-link href=/posts/oscp/ title="Discover what the Hugo - FixIt theme is all about and the core-concepts behind it."><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> OSCP</a>
+<a class=menu-link href=/posts/oscp/ title="Offensive Security Certified Professional Guide (OSCP)"><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> OSCP</a>
 </li></ul></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop>
 <input type=text placeholder="Search here" id=search-input-desktop>
 <a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=Search>
@@ -112,7 +84,7 @@ Cancel
 </span>
 <ul class=sub-menu>
 <li class="menu-item active">
-<a class=menu-link href=/posts/oscp/ title="Discover what the Hugo - FixIt theme is all about and the core-concepts behind it."><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> OSCP</a>
+<a class=menu-link href=/posts/oscp/ title="Offensive Security Certified Professional Guide (OSCP)"><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> OSCP</a>
 </li></ul></li><li class="menu-item theme-switch" title="Switch Theme">
 <i class="fa-solid fa-adjust fa-fw" aria-hidden=true></i>
 </li></ul>
@@ -123,25 +95,159 @@ Cancel
 </div>
 <div class="search-dropdown mobile">
 <div id=search-dropdown-mobile></div>
-</div><main class=container data-page-style=normal><aside class=toc id=toc-auto></aside>
+</div><main class=container data-page-style=normal><aside class=toc id=toc-auto><h2 class=toc-title>Contents&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden=true></i></h2>
+<div class=toc-content id=toc-content-auto></div></aside>
 <aside class=aside-custom>
 </aside>
 <article class="page single">
 <div class=header><h1 class="single-title animate__animated animate__flipInX">
-<span title=Repost class=icon-repost><i class="fa-solid fa-share fa-fw" aria-hidden=true></i></span><span>OSCP</span>
-</h1></div><div class=post-meta>
+<span title=Repost class=icon-repost><i class="fa-solid fa-share fa-fw" aria-hidden=true></i></span><span>How I cleared OSCP in my First Attempt</span>
+</h1><p class="single-subtitle animate__animated animate__fadeIn">OSCP Preparation Guide</p></div><div class=post-meta>
 <div class=post-meta-line><span class=post-author><span class=author><i class="fa-solid fa-user-circle" aria-hidden=true></i>
-</span></span>
-<span class=post-category>included in <a href=/categories/infosec/><i class="fa-regular fa-folder fa-fw" aria-hidden=true></i> infosec</a></span></div>
-<div class=post-meta-line><span title="2022-12-26 03:26:27"><i class="fa-regular fa-calendar-alt fa-fw" aria-hidden=true></i>&nbsp;<time datetime=2022-12-26>2022-12-26</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw" aria-hidden=true></i> 10 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw" aria-hidden=true></i> One minute</span>&nbsp;</div>
-</div><div class=content id=content><p>This is the test post</p>
-<pre tabindex=0><code>&lt;?php
-
-echo &quot;hello world&quot;;
-
-?&gt;
-
-</code></pre></div><div class=post-footer id=post-footer>
+Siva Rajendran</span></span>
+<span class=post-category>included in <a href=/categories/infosec/><i class="fa-regular fa-folder fa-fw" aria-hidden=true></i> Infosec</a>&ensp;<a href=/categories/certifications/><i class="fa-regular fa-folder fa-fw" aria-hidden=true></i> Certifications</a>&ensp;<a href=/categories/offsec/><i class="fa-regular fa-folder fa-fw" aria-hidden=true></i> OffSec</a></span></div>
+<div class=post-meta-line><span title="2022-12-26 03:26:27"><i class="fa-regular fa-calendar-alt fa-fw" aria-hidden=true></i>&nbsp;<time datetime=2022-12-26>2022-12-26</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw" aria-hidden=true></i> 1479 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw" aria-hidden=true></i> 7 minutes</span>&nbsp;</div>
+</div><div class="details toc" id=toc-static data-kept=false>
+<div class="details-summary toc-title">
+<span>Contents</span>
+<span><i class="details-icon fa-solid fa-angle-right" aria-hidden=true></i></span>
+</div>
+<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<ul>
+<li><a href=#before-registering-for-oscp>Before registering for OSCP</a></li>
+<li><a href=#oscp-preparation-timeline>OSCP Preparation Timeline</a></li>
+<li><a href=#the-finale>The Finale</a></li>
+<li><a href=#christmas-day-present>Christmas Day Present</a></li>
+<li><a href=#bonus-tip-preparation-guide>Bonus Tip: Preparation Guide</a></li>
+</ul>
+</nav></div>
+</div><div class=content id=content><p>In this blog, I am going to share my experience on OSCP and provide you guys some tip which might be useful for those who are preparaing for their OSCP exam. Since I took the recent OSCP exam which Includes the <em>Active Directory</em> structure as well. I would share some tips on this part as well.</p>
+<p>Hi, I am Siva Rajendran and I am working as a IT Security Consultant for the last 4 years with main focus on penetration testing of web application and Internal Active directory assessments. Since the start of my career into <em>Penetration Testing</em> field, I wanted to do the <strong>OSCP</strong> certification. But I wanted to make sure that I am fully prepared and confident enough to clear the exam in my first attempt. So, I was preparaing myself alot in the last years in the area of Web Application and Active Directory. I did <a href=https://www.eccouncil.org/programs/certified-ethical-hacker-ceh/ target=_blank rel="external nofollow noopener noreferrer">CEH</a>, <a href=https://elearnsecurity.com/product/ejpt-certification/ target=_blank rel="external nofollow noopener noreferrer">eJPT</a> certification along with <a href=https://bootcamps.pentesteracademy.com/course/ad-beginner-jan-23 target=_blank rel="external nofollow noopener noreferrer">CRTP</a> which gave me huge strength in Windows Active Directory environment.</p>
+<figure><img src=https://api.accredible.com/v1/frontend/credential_website_embed_image/certificate/65194964><figcaption>
+<h4>OSCP Certificate</h4>
+</figcaption>
+</figure>
+<h2 id=before-registering-for-oscp>Before registering for OSCP</h2>
+<p>Before registering for OSCP, I made sure that I had enough experience with Web Application testing. Since my daily work aligns directly with this, it was helping me alot in the last few years. Along with that, I was actively participating in Bug-Bounty programs as well to hone my skills. These experience gave me indepth analysis in web application penetration testing field. Also, I did alot of <em>HacktheBox</em> and <em>TryHackMe</em> rooms in the last 2-3 years as well.</p>
+<p>I felt I was missing alot in Windows Active Directory part and the recent change in OSCP which included Active Directory as 40 points machine. It is undoubtedly the integral part in clearing the OSCP exam. With this in mind along with my recent work, I was able to focus mainly working many Internal Active Directory assessments as well. I gained ample amount of experience in the past 1.6 years. To extend this knowledge, I regiserted for the <a href=https://bootcamps.pentesteracademy.com/course/ad-beginner-jan-23 target=_blank rel="external nofollow noopener noreferrer">Certified Red Team Professional (CRTP)</a> course in <em>Pentester Academy</em> which helped me to get more deep understanding on Windows Active Directory environment.</p>
+<h2 id=oscp-preparation-timeline>OSCP Preparation Timeline</h2>
+<table>
+<thead>
+<tr>
+<th style=text-align:center>Timeline</th>
+<th style=text-align:right>Activity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:center><em>October 1, 2022</em></td>
+<td style=text-align:right>Started with course materials</td>
+</tr>
+<tr>
+<td style=text-align:center><em>October 15, 2022</em></td>
+<td style=text-align:right>Finished with course materials</td>
+</tr>
+<tr>
+<td style=text-align:center><em>October 16, 2022</em></td>
+<td style=text-align:right>Started with OSCP Lab Machines</td>
+</tr>
+<tr>
+<td style=text-align:center><em>November 24, 2022</em></td>
+<td style=text-align:right>Finished with OSCP Lab Machines</td>
+</tr>
+<tr>
+<td style=text-align:center><em>November 25, 2022</em></td>
+<td style=text-align:right>Started with Proving Grounds Practice Machines</td>
+</tr>
+<tr>
+<td style=text-align:center><em>December 19, 2022</em></td>
+<td style=text-align:right>Finished with Proving Grounds Practice Machines</td>
+</tr>
+<tr>
+<td style=text-align:center><em>December 22, 2022</em></td>
+<td style=text-align:right>Scheduled the exam</td>
+</tr>
+<tr>
+<td style=text-align:center><em>December 25, 2022</em></td>
+<td style=text-align:right>Got the official email from OffSec</td>
+</tr>
+</tbody>
+</table>
+<p>I took the 90 days labs time since It was default by <a href=https://www.offensive-security.com/courses/pen-200/ target=_blank rel="external nofollow noopener noreferrer">Offensive Security pricing model</a>, I started my course on October 1st, 2022 and I have immediately registered the <em>exam</em> on December 23rd, 2022. It took me <em>15</em> days, <em>87 hrs (approx)</em> to complete course material PDF Guide and most of exercises. I was roughly spending 6 hrs everyday after work on my OSCP preparation. As per the <a href=https://help.offensive-security.com/hc/en-us/articles/7897614851092-Sunsetting-PWK-Legacy-Course-Exercises-FAQ#h_01G8AN7WS0Y87D278NP5DASD3Q target=_blank rel="external nofollow noopener noreferrer">New OSCP guidelines</a>, It is possible to get 10 Bonus points when we finish 80% of exercise topics and submit the flag on the portal along with 30 lab machines.</p>
+<figure><img src=/plan.jpg><figcaption>
+<h4>OSCP Timesheet</h4>
+</figcaption>
+</figure>
+<p>After the PDF completion, I decided to do the OSCP Labs, There were different environments like <em>Public,Dev,Admin,Production</em> and some requires <em>pivoting and tunneling</em> to access the machines in other environments. I did almost <em>71</em> machines from the labs. It had <em>75</em> overall machines If I remember correct. Some machines in the lab were quite straight forward and few were really challenging. I went to <a href=https://portswigger.net/web-security target=_blank rel="external nofollow noopener noreferrer">Burp Suite Web Academy</a> and completed the SQL-Injection lessons and Buffer Overflow room in <a href=https://tryhackme.com/ target=_blank rel="external nofollow noopener noreferrer">TryHackMe</a> as well. At the end of november, I have completed my OSCP-Labs and still almost had 4 weeks before the exam.</p>
+<p>Now, I was contemplating to take a subscription either from <a href=https://app.hackthebox.com target=_blank rel="external nofollow noopener noreferrer">HacktheBox</a> or <a href=https://www.offensive-security.com/labs/individual/ target=_blank rel="external nofollow noopener noreferrer">Proving Grounds Practice</a>. This was one of the best decisions which helped me in clearing the exam as well. I have decided to take a month subscription from <strong>Proving Grounds Practice</strong> since it is directly from <strong>Offensive Security</strong> and there were many retired machines available as well. I decided to complete the famous <em>TJ-Null OSCP-Like-Machines</em> from <em>Proving Grounds</em>. I ended up finishing all the <em>Windows</em> machines and <em>medium</em> machines on <em>Linux</em> along with <em>TJ-Null</em> recommended machines. These machines were really tougher than the machines present in OSCP labs and this teached me so many techniques in the area of <em>web application</em>, <em>privilege-escalation</em> areas.</p>
+<p>Now I have one week left before the exam, I decided to revise the <em>buffer-overflow</em> excercises and also I have done all the <em>Extra-Mile</em> exercises on the OSCP Course Materials for the <em>Buffer-Overflow</em> section to get deep understanding on this topics. I would definitely recommend the Extra Mile exercises as well, If you have time.</p>
+<h2 id=the-finale>The Finale</h2>
+<p>One day before the exam, I was super relaxed and was skimming through my notes and checking the setup and taking necessary backup of the VM-Images. I started my exam at 11 am on 22nd December, I logged into the exam and followed the Instructions which was given by the proctor. I got 1 AD-Set along with 2 linux and 1 Windows machine. I did the exercises before, So I know I have 10 bonus points. My approach is first to finish the <em>Active Directory</em> set and get the 40 points secured. It took me less than 3 hours and I have managed to Pwned the active directory. The Active Directory set was straight-forward. The experience I gained from doing <em>Proving Grounds</em> Windows-AD type machine helped me alot along with <em>CRTP</em> experience.</p>
+<p>Now I got 40 points from AD and already have 10 bonus points. I need now 20 more points to clear the exam. I took a 15 minutes break before starting the next linux machine. The linux machine was easier and I managed to get both <em>user</em> and <em>root</em> within 2 hour. Now I got 70 points and I was happier that I got the passing points. Now I took a 30 minutes break and went for the second <em>linux</em> machine. This was also easier and I have managed to root it within 2 hours. Now I got 90 points. It was almost 19:00 pm.</p>
+<p>I took one hour break and came back to try the last windows machine, I managed to read both the user and root flag within first 30 minutes, But I can&rsquo;t able to find a way to get a shell in the machine. I tried for 4 hours and did not manage to get the shell. So I went to sleep and came back after 6 hours around 4 am in the morning on 23rd December to give a go for another 2-3 hours. Still was not able to manage. So I gave up and started checking the old proofs and screenshots to make sure everything was there for each and every step.</p>
+<p>Then I started to write the report and It took me 5-6 hours to complete the report with all the findings and screenshots and then I submitted the report to the <em>OffSec</em></p>
+<h2 id=christmas-day-present>Christmas Day Present</h2>
+<p>On the 25th December, 2022 <em>Christmas Day</em>, I got the mail from <em>Offensive Security</em> that I have cleared my <strong>OSCP</strong> exam and the certificate is available for download. It was like a christmas gift to me. I was so happy that my hardwork paid off and all the skills which I have learned and consumed for the last years worked really well. I was able to get 80 points within 12 hours of the time and the <em>Proving Grounds</em> lab subscription helped me alot.</p>
+<figure><img src=/oscp-mail.png><figcaption>
+<h4>OSCP Mail</h4>
+</figcaption>
+</figure>
+<h2 id=bonus-tip-preparation-guide>Bonus Tip: Preparation Guide</h2>
+<p>If <em>OSCP</em> is your first certificate in OffSec area, then I would recommend to start with <a href=https://elearnsecurity.com/product/ejpt-certification/ target=_blank rel="external nofollow noopener noreferrer">eJPT</a> course from <em>Elearn Security</em> along with <a href=https://tryhackme.com/ target=_blank rel="external nofollow noopener noreferrer">TryHackMe</a>, <a href=https://portswigger.net/web-security target=_blank rel="external nofollow noopener noreferrer">Burp Suite Web Academy</a> and <a href=https://app.hackthebox.com target=_blank rel="external nofollow noopener noreferrer">HacktheBox</a> and then proceed to the following.</p>
+<p>If you already have experince in <em>Bug-Bounty Hunting</em> or continuously working in OffSec area or actively participating in <em>CTFs</em>, I would definitely recommend the following.</p>
+<ul>
+<li>
+<p>First the OSCP Labs and course materials provided by <em>OFFSEC</em>, make sure to finish the exercises and have 10 bonus points. You never know, when It might come In Handy.</p>
+</li>
+<li>
+<p>If you want to Improve on Active Directory: <a href=https://bootcamps.pentesteracademy.com/course/ad-beginner-jan-23 target=_blank rel="external nofollow noopener noreferrer">Certified Red Team Professional (CRTP)</a></p>
+</li>
+<li>
+<p>Buffer Overflow Room from <a href=https://tryhackme.com/room/bufferoverflowprep target=_blank rel="external nofollow noopener noreferrer">TryHackMe-BufferOverFlow Room</a></p>
+</li>
+<li>
+<p>Defintely recommend this subscription for a month or so in <a href=https://www.offensive-security.com/labs/individual/ target=_blank rel="external nofollow noopener noreferrer">Proving Grounds Practice</a></p>
+</li>
+<li>
+<p>The Following proving grounds machines from <em>TJ-Null List</em></p>
+</li>
+</ul>
+<figure><img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/268a1412-c256-4b74-8426-407b5e4fd71a/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20230129%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20230129T191648Z&X-Amz-Expires=86400&X-Amz-Signature=d609c1947f6b1bd30c8d538b115a973d7237098e9943ef92a25ef081a0fff64f&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject"><figcaption>
+<h4>Proving Grounds Practice</h4>
+</figcaption>
+</figure>
+<ul>
+<li>
+<p>The following machine are recommended for Active Directory Set:</p>
+<ul>
+<li>Vault</li>
+<li>Heist</li>
+<li>Hutch</li>
+</ul>
+</li>
+<li>
+<p>Watch one <a href=https://www.youtube.com/@ippsec target=_blank rel="external nofollow noopener noreferrer">Ippsec</a> video a day. This helps alot to understand some techniques manually without using metasploit, which might come in handy during the exam.</p>
+</li>
+<li>
+<p>Last but not the least, make sure to have notes on everything. I was using <em>Notion</em> for taking notes for my whole <em>OSCP Journey</em></p>
+</li>
+</ul>
+<div class="details admonition tip open">
+<div class="details-summary admonition-title">
+<i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden=true></i>Exam Tip<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden=true></i>
+</div>
+<div class=details-content>
+<div class=admonition-content>Make sure to take <strong>regular-breaks</strong> and <strong>stay hydrated</strong>.</div>
+</div>
+</div>
+<div class="details admonition success open">
+<div class="details-summary admonition-title">
+<i class="icon fa-solid fa-check-circle fa-fw" aria-hidden=true></i>Final Tip<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden=true></i>
+</div>
+<div class=details-content>
+<div class=admonition-content>Wishing you all good luck. <strong>Try Harder!!!</strong></div>
+</div>
+</div></div><div class=post-footer id=post-footer>
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
@@ -150,15 +256,16 @@ echo &quot;hello world&quot;;
 <div class=post-info-line>
 <div class=post-info-md></div>
 <div class=post-info-share>
-<span><a href=javascript:void(0); title="Share on Twitter" data-sharer=twitter data-url=http://example.org/posts/oscp/ data-title=OSCP data-via="map[id:@0xSh1v4 prefix:https://twitter.com/ title:Twitter weight:0]" data-hashtags=infosec><i class="fa-brands fa-twitter fa-fw" aria-hidden=true></i></a>
-<a href=javascript:void(0); title="Share on Facebook" data-sharer=facebook data-url=http://example.org/posts/oscp/ data-hashtag=infosec><i class="fa-brands fa-facebook-square fa-fw" aria-hidden=true></i></a>
-<a href=javascript:void(0); title="Share on 微博" data-sharer=weibo data-url=http://example.org/posts/oscp/ data-title=OSCP><i class="fa-brands fa-weibo fa-fw" aria-hidden=true></i></a>
+<span><a href=javascript:void(0); title="Share on Twitter" data-sharer=twitter data-url=https://0xsh1v4.github.io/posts/oscp/ data-title="How I cleared OSCP in my First Attempt" data-via="map[id:@0xSh1v4 prefix:https://twitter.com/ title:Twitter weight:0]" data-hashtags=infosec,oscp,offsec><i class="fa-brands fa-twitter fa-fw" aria-hidden=true></i></a>
+<a href=javascript:void(0); title="Share on Linkedin" data-sharer=linkedin data-url=https://0xsh1v4.github.io/posts/oscp/><i class="fa-brands fa-linkedin fa-fw" aria-hidden=true></i></a>
+<a href=javascript:void(0); title="Share on Xing" data-sharer=xing data-url=https://0xsh1v4.github.io/posts/oscp/ data-title="How I cleared OSCP in my First Attempt"><i class="fa-brands fa-xing fa-fw" aria-hidden=true></i></a>
+<a href=javascript:void(0); title="Share on 微博" data-sharer=weibo data-url=https://0xsh1v4.github.io/posts/oscp/ data-title="How I cleared OSCP in my First Attempt"><i class="fa-brands fa-weibo fa-fw" aria-hidden=true></i></a>
 </span>
 </div>
 </div>
 </div>
 <div class=post-info-more>
-<section class=post-tags><i class="fa-solid fa-tags fa-fw me-1" aria-hidden=true></i><a href=/tags/infosec/ class=post-tag>infosec</a></section>
+<section class=post-tags><i class="fa-solid fa-tags fa-fw me-1" aria-hidden=true></i><a href=/tags/infosec/ class=post-tag>infosec</a><a href=/tags/oscp/ class=post-tag>oscp</a><a href=/tags/offsec/ class=post-tag>offsec</a></section>
 <section>
 <span><a href=javascript:void(0); onclick=window.history.back()>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span>
 </section>
@@ -166,13 +273,12 @@ echo &quot;hello world&quot;;
 <div class=post-nav></div>
 </div>
 </article></main><footer class=footer>
-<div class=footer-container><div class="footer-line powered">Powered by <a href=https://gohugo.io/ target=_blank rel="external nofollow noopener noreferrer" title="Hugo 0.89.3">Hugo</a> | Theme - <a href=https://github.com/hugo-fixit/FixIt target=_blank rel=external title="FixIt v0.2.17-RC"><img class=fixit-icon src=/fixit.min.svg alt="FixIt logo">&nbsp;FixIt</a>
-</div><div class="footer-line copyright" itemscope itemtype=http://schema.org/CreativeWork><i class="fa-regular fa-copyright fa-fw" aria-hidden=true></i>
-<span itemprop=copyrightYear>2021 - 2023</span><span class=author itemprop=copyrightHolder>
-<a href=/></a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class="footer-line statistics"><span class=site-time title="Website running ..."><i class="fa-solid fa-heartbeat fa-fw animate-icon" aria-hidden=true></i><span class="run-times ms-1">Website running ...</span></span></div></div>
+<div class=footer-container><div class="footer-line copyright" itemscope itemtype=http://schema.org/CreativeWork><i class="fa-regular fa-copyright fa-fw" aria-hidden=true></i>
+<span itemprop=copyrightYear>2022 - 2023</span><span class=author itemprop=copyrightHolder>
+<a href=/></a></span></div><div class="footer-line statistics"><span class=site-time title="Website running ..."><i class="fa-solid fa-heartbeat fa-fw animate-icon" aria-hidden=true></i><span class="run-times ms-1">Website running ...</span></span></div></div>
 </footer></div><div class=widgets><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role=button aria-label="Back to Top"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden=true></i><span class="variant-numeric d-none">0%</span>
 </div></div><div id=mask></div><noscript>
 <div class=noscript-warning>Theme FixIt works best with JavaScript enabled.</div>
 </noscript>
-</div><link rel=stylesheet href=/lib/cookieconsent/cookieconsent.min.css><script src=/lib/autocomplete/autocomplete.min.js defer></script><script src=/lib/lunr/lunr.min.js defer></script><script src=/lib/lazysizes/lazysizes.min.js async defer></script><script src=/lib/sharer/sharer.min.js async defer></script><script src=/lib/typeit/index.umd.js defer></script><script src=/lib/cookieconsent/cookieconsent.min.js defer></script><script>window.config={code:{copyTitle:"Copy to clipboard",editLockTitle:"Lock editable code block",editUnLockTitle:"Unlock editable code block",editable:!0,maxShownLines:10},comment:{enable:!1},cookieconsent:{content:{dismiss:"Got it!",link:"Learn more",message:"This website uses Cookies to improve your experience."},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},data:{"typeit-header-desktop":"[root@0xSh1v4:]","typeit-header-title-mobile":"[root@0xSh1v4:]"},search:{highlightTag:"em",lunrIndexURL:"/index.json",maxResultLength:10,noResultsFound:"No results found",snippetLength:30,type:"lunr"},typeit:{cursorChar:"|",cursorSpeed:1e3,data:{"typeit-header-desktop":["typeit-header-desktop"],"typeit-header-title-mobile":["typeit-header-title-mobile"]},duration:-1,speed:100}}</script><script src=/js/theme.min.js defer></script></body>
+</div><link rel=stylesheet href=/lib/lightgallery/css/lightgallery-bundle.min.css><link rel=stylesheet href=/lib/cookieconsent/cookieconsent.min.css><link rel=stylesheet href=/lib/pace/themes/green/pace-theme-minimal.css><script src=/lib/autocomplete/autocomplete.min.js defer></script><script src=/lib/lunr/lunr.min.js defer></script><script src=/lib/lazysizes/lazysizes.min.js async defer></script><script src=/lib/twemoji/twemoji.min.js defer></script><script src=/lib/lightgallery/lightgallery.min.js defer></script><script src=/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js defer></script><script src=/lib/lightgallery/plugins/zoom/lg-zoom.min.js defer></script><script src=/lib/sharer/sharer.min.js async defer></script><script src=/lib/typeit/index.umd.js defer></script><script src=/lib/cookieconsent/cookieconsent.min.js defer></script><script src=/lib/pace/pace.min.js async defer></script><script>window.config={code:{copyTitle:"Copy to clipboard",editLockTitle:"Lock editable code block",editUnLockTitle:"Unlock editable code block",editable:!0,maxShownLines:10},comment:{enable:!1},cookieconsent:{content:{dismiss:"Got it!",link:"Learn more",message:"This website uses Cookies to improve your experience."},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},data:{"typeit-header-desktop":"[root@0xSh1v4:]","typeit-header-title-mobile":"[root@0xSh1v4:]"},lightgallery:!0,search:{highlightTag:"em",lunrIndexURL:"/index.json",maxResultLength:10,noResultsFound:"No results found",snippetLength:30,type:"lunr"},twemoji:!0,typeit:{cursorChar:"|",cursorSpeed:1e3,data:{"typeit-header-desktop":["typeit-header-desktop"],"typeit-header-title-mobile":["typeit-header-title-mobile"]},duration:-1,speed:100}}</script><script src=/js/theme.min.js defer></script></body>
 </html>
