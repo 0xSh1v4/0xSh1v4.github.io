@@ -3,25 +3,25 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2">
 <meta name=robots content="noodp">
-<title>Reflection on my Bug Bounty Journey 2022 - 0xSh1v4 Blog</title><meta name=author content>
+<title>Chaining the tale of 2 Vulnerabilities - 0xSh1v4 Blog</title><meta name=author content>
 <meta name=author-link content>
-<meta name=description content="Last year with Synack Red Team has been a wholesome experience for me."><meta name=keywords content="bug-bounty,synack"><meta itemprop=name content="Reflection on my Bug Bounty Journey 2022">
-<meta itemprop=description content="Last year with Synack Red Team has been a wholesome experience for me."><meta itemprop=datePublished content="2023-01-02T03:26:27+01:00">
-<meta itemprop=dateModified content="2023-01-02T03:26:27+01:00">
-<meta itemprop=wordCount content="440">
-<meta itemprop=keywords content="infosec,bugbounty,synack,"><meta property="og:title" content="Reflection on my Bug Bounty Journey 2022">
-<meta property="og:description" content="Last year with Synack Red Team has been a wholesome experience for me.">
+<meta name=description content="This is my new Hugo FixIt site"><meta name=keywords content="bug-bounty,synack,cors,subdomain"><meta itemprop=name content="Chaining the tale of 2 Vulnerabilities">
+<meta itemprop=description content><meta itemprop=datePublished content="2023-01-23T03:26:27+01:00">
+<meta itemprop=dateModified content="2023-01-23T03:26:27+01:00">
+<meta itemprop=wordCount content="0">
+<meta itemprop=keywords content="infosec,bugbounty,synack,cors,"><meta property="og:title" content="Chaining the tale of 2 Vulnerabilities">
+<meta property="og:description" content>
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://0xsh1v4.github.io/posts/bug-bounty-2022/"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2023-01-02T03:26:27+01:00">
-<meta property="article:modified_time" content="2023-01-02T03:26:27+01:00">
+<meta property="og:url" content="https://0xsh1v4.github.io/posts/tale-of-2/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2023-01-23T03:26:27+01:00">
+<meta property="article:modified_time" content="2023-01-23T03:26:27+01:00">
 <meta name=twitter:card content="summary">
-<meta name=twitter:title content="Reflection on my Bug Bounty Journey 2022">
-<meta name=twitter:description content="Last year with Synack Red Team has been a wholesome experience for me.">
+<meta name=twitter:title content="Chaining the tale of 2 Vulnerabilities">
+<meta name=twitter:description content>
 <meta name=application-name content="0xSh1v4">
 <meta name=apple-mobile-web-app-title content="0xSh1v4"><meta name=theme-color data-light=#f8f8f8 data-dark=#252627 content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=canonical href=https://0xsh1v4.github.io/posts/bug-bounty-2022/><link rel=prev href=https://0xsh1v4.github.io/posts/oscp/><link rel=next href=https://0xsh1v4.github.io/posts/tale-of-2/><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Reflection on my Bug Bounty Journey 2022","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/0xsh1v4.github.io\/posts\/bug-bounty-2022\/"},"genre":"posts","keywords":"infosec, bugbounty, synack","wordcount":440,"url":"https:\/\/0xsh1v4.github.io\/posts\/bug-bounty-2022\/","datePublished":"2023-01-02T03:26:27+01:00","dateModified":"2023-01-02T03:26:27+01:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"Siva Rajendran"},"description":""}</script></head>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=canonical href=https://0xsh1v4.github.io/posts/tale-of-2/><link rel=prev href=https://0xsh1v4.github.io/posts/bug-bounty-2022/><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Chaining the tale of 2 Vulnerabilities","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/0xsh1v4.github.io\/posts\/tale-of-2\/"},"genre":"posts","keywords":"infosec, bugbounty, synack, cors","wordcount":0,"url":"https:\/\/0xsh1v4.github.io\/posts\/tale-of-2\/","datePublished":"2023-01-23T03:26:27+01:00","dateModified":"2023-01-23T03:26:27+01:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"Siva Rajendran"},"description":""}</script></head>
 <body data-header-desktop=sticky data-header-mobile=auto><script>(window.localStorage?.getItem('theme')?localStorage.getItem('theme')==='dark':'auto'==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:'auto'==='dark')&&document.body.setAttribute('data-theme','dark')</script><div class=wrapper><header class="desktop animate__faster" id=header-desktop>
 <div class=header-wrapper>
 <div class=header-title>
@@ -33,9 +33,9 @@
 <a class=menu-link href=/tags/><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden=true></i> Tags</a></li><li class="menu-item active has-children">
 <a class=menu-link href=/>Bug-Bounty</a><i class="dropdown-icon fa-solid fa-chevron-down" aria-hidden=true></i>
 <ul class=sub-menu>
-<li class="menu-item active">
+<li class=menu-item>
 <a class=menu-link href=/posts/bug-bounty-2022/ title="Reflection on Bug Bounty Journey 2022"><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> Bug-Bounty 2022</a>
-</li><li class=menu-item>
+</li><li class="menu-item active">
 <a class=menu-link href=/posts/tale-of-2/ title="A tale of 2 Vulnerabilities"><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> Tale of 2</a>
 </li></ul></li><li class="menu-item has-children">
 <a class=menu-link href=/>Certifications</a><i class="dropdown-icon fa-solid fa-chevron-down" aria-hidden=true></i>
@@ -90,9 +90,9 @@ Cancel
 <i class="dropdown-icon fa-solid fa-chevron-right" aria-hidden=true></i>
 </span>
 <ul class=sub-menu>
-<li class="menu-item active">
+<li class=menu-item>
 <a class=menu-link href=/posts/bug-bounty-2022/ title="Reflection on Bug Bounty Journey 2022"><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> Bug-Bounty 2022</a>
-</li><li class=menu-item>
+</li><li class="menu-item active">
 <a class=menu-link href=/posts/tale-of-2/ title="A tale of 2 Vulnerabilities"><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> Tale of 2</a>
 </li></ul></li><li class=menu-item><span class=nested-item>
 <a class=menu-link href=/>Certifications</a>
@@ -116,62 +116,36 @@ Cancel
 </aside>
 <article class="page single">
 <div class=header><h1 class="single-title animate__animated animate__flipInX">
-<span title=Repost class=icon-repost><i class="fa-solid fa-share fa-fw" aria-hidden=true></i></span><span>Reflection on my Bug Bounty Journey 2022</span>
+<span title=Repost class=icon-repost><i class="fa-solid fa-share fa-fw" aria-hidden=true></i></span><span>Chaining the tale of 2 Vulnerabilities</span>
 </h1><p class="single-subtitle animate__animated animate__fadeIn">Synack Bug-bounty Program</p></div><div class=post-meta>
 <div class=post-meta-line><span class=post-author><span class=author><i class="fa-solid fa-user-circle" aria-hidden=true></i>
 Siva Rajendran</span></span>
 <span class=post-category>included in <a href=/categories/infosec/><i class="fa-regular fa-folder fa-fw" aria-hidden=true></i> Infosec</a>&ensp;<a href=/categories/bugbounty/><i class="fa-regular fa-folder fa-fw" aria-hidden=true></i> Bugbounty</a>&ensp;<a href=/categories/synack/><i class="fa-regular fa-folder fa-fw" aria-hidden=true></i> Synack</a></span></div>
-<div class=post-meta-line><span title="2023-01-02 03:26:27"><i class="fa-regular fa-calendar-alt fa-fw" aria-hidden=true></i>&nbsp;<time datetime=2023-01-02>2023-01-02</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw" aria-hidden=true></i> 440 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw" aria-hidden=true></i> 3 minutes</span>&nbsp;</div>
-</div><div class=content id=content><p>Last year with <a href=https://www.synack.com/red-team/ target=_blank rel="external nofollow noopener noreferrer">Synack Red</a> Team has been a wholesome experience for me.</p>
-<p>My journey with Synack started in October 2021, but I have only started to get more hands-on since February 2022. Within the span of next 10 months, I was managed to reach the <strong>Level 5</strong> in Synack and won <strong>15of15</strong> award twice in my <em>Level-1</em> and in my <em>Level-3</em>. Due to my performance, I was inducted to <a href=https://acropolis.synack.com/inductees/0xSh1v4/ target=_blank rel="external nofollow noopener noreferrer">Synack Acropolis</a> within 4-5 months.</p>
-<figure><img src=/acropolis.png><figcaption>
-<h4>Synack-Acropolis</h4>
-</figcaption>
-</figure>
-<p>The first few weeks in synack was completely new, Since it is a private bug bounty program and I had to learn lots of new procedures which they incorporated and had to follow it. Since everything was properly documented in their help-guide. This helped me alot to understand and their customer support and the community people on Slack channel were really helpful and quite fast.</p>
-<p>Synack only accept Impactful findings as a valid one. So for ex: findings like <em>Security headers</em> , <em>Cookie Flags</em>, <em>TLS/SSL</em> misconfigurations won&rsquo;t be accepted, unless you show an Impact on it. For ex: <em>phpinfo()</em> output won&rsquo;t be accepted as <em>sensitive Information exposure</em> until you show an <em>Account Takeover</em> possibility using that exposure. This gives me a new dimension and to always look for more Impactful finding during my every assessment. Not only that, they also thrives in report quality. This helped me alot to improve at my current work as well.</p>
-<p>After few weeks, I understood the process and expectation from synack and then I have started to find bugs and started to make a good report as well. This helped me to improve my report-writing skills as well. I won the first month <em>15of15</em> award for <em>Level-1</em> in synack and same during septemeber 2022 for the <em>Level-3</em> as well.</p>
-<figure><img src=/15.png><figcaption>
-<h4>Synack-15of15</h4>
-</figcaption>
-</figure>
-<p>Then, I have started to find more bugs on the platform on the regular basis. I have reported 54 vulnerabilities last year in below categories mentioned in the bar diagram. Majority of the vulnerabilities are from the categories <em>Cross-Site Scripting</em> and <em>Access Control/IDORs</em></p>
-<figure><img src=/overview.png><figcaption>
-<h4>Overview of my Reported Findings Category 2022</h4>
-</figcaption>
-</figure>
-<p>I have received the <em>coins</em> for each level from synack as a token of appreciation along with their first-vulnerabiliy swag, which they give to <em>SRT</em> for finding their first vulnerability on the platform.</p>
-<figure><img src=/coins.jpeg><figcaption>
-<h4>Synack-Coins</h4>
-</figcaption>
-</figure>
-<p>By end of the year, I managed to reach <strong>Level-5</strong> in Synack. Personally, It was a great amount of learning and findings bugs and competing with best hackers around the world. I would like to find more vulnerabilities in 2023 and also focus on the other vulnerabilities categories as well.</p>
-<blockquote class=twitter-tweet><p lang=en dir=ltr>Leveled up to 0x05! <a href=https://t.co/B7hPbyGa72>pic.twitter.com/B7hPbyGa72</a> via <a href="https://twitter.com/SynackRedTeam?ref_src=twsrc%5Etfw">@SynackRedTeam</a></p>&mdash; Siva Rajendran (@0xSh1v4) <a href="https://twitter.com/0xSh1v4/status/1601358641915125760?ref_src=twsrc%5Etfw">December 9, 2022</a></blockquote>
-<script async src=https://platform.twitter.com/widgets.js></script></div><div class=post-footer id=post-footer>
+<div class=post-meta-line><span title="2023-01-23 03:26:27"><i class="fa-regular fa-calendar-alt fa-fw" aria-hidden=true></i>&nbsp;<time datetime=2023-01-23>2023-01-23</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw" aria-hidden=true></i> 0 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw" aria-hidden=true></i> 0 minutes</span>&nbsp;</div>
+</div><div class=content id=content></div><div class=post-footer id=post-footer>
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
-<span title="2023-01-02 03:26:27">Updated on 2023-01-02&nbsp;</span>
+<span title="2023-01-23 03:26:27">Updated on 2023-01-23&nbsp;</span>
 </div></div>
 <div class=post-info-line>
 <div class=post-info-md></div>
 <div class=post-info-share>
-<span><a href=javascript:void(0); title="Share on Twitter" data-sharer=twitter data-url=https://0xsh1v4.github.io/posts/bug-bounty-2022/ data-title="Reflection on my Bug Bounty Journey 2022" data-via="map[id:@0xSh1v4 prefix:https://twitter.com/ title:Twitter weight:0]" data-hashtags=infosec,bugbounty,synack><i class="fa-brands fa-twitter fa-fw" aria-hidden=true></i></a>
-<a href=javascript:void(0); title="Share on Linkedin" data-sharer=linkedin data-url=https://0xsh1v4.github.io/posts/bug-bounty-2022/><i class="fa-brands fa-linkedin fa-fw" aria-hidden=true></i></a>
-<a href=javascript:void(0); title="Share on Xing" data-sharer=xing data-url=https://0xsh1v4.github.io/posts/bug-bounty-2022/ data-title="Reflection on my Bug Bounty Journey 2022"><i class="fa-brands fa-xing fa-fw" aria-hidden=true></i></a>
-<a href=javascript:void(0); title="Share on 微博" data-sharer=weibo data-url=https://0xsh1v4.github.io/posts/bug-bounty-2022/ data-title="Reflection on my Bug Bounty Journey 2022"><i class="fa-brands fa-weibo fa-fw" aria-hidden=true></i></a>
+<span><a href=javascript:void(0); title="Share on Twitter" data-sharer=twitter data-url=https://0xsh1v4.github.io/posts/tale-of-2/ data-title="Chaining the tale of 2 Vulnerabilities" data-via="map[id:@0xSh1v4 prefix:https://twitter.com/ title:Twitter weight:0]" data-hashtags=infosec,bugbounty,synack,cors><i class="fa-brands fa-twitter fa-fw" aria-hidden=true></i></a>
+<a href=javascript:void(0); title="Share on Linkedin" data-sharer=linkedin data-url=https://0xsh1v4.github.io/posts/tale-of-2/><i class="fa-brands fa-linkedin fa-fw" aria-hidden=true></i></a>
+<a href=javascript:void(0); title="Share on Xing" data-sharer=xing data-url=https://0xsh1v4.github.io/posts/tale-of-2/ data-title="Chaining the tale of 2 Vulnerabilities"><i class="fa-brands fa-xing fa-fw" aria-hidden=true></i></a>
+<a href=javascript:void(0); title="Share on 微博" data-sharer=weibo data-url=https://0xsh1v4.github.io/posts/tale-of-2/ data-title="Chaining the tale of 2 Vulnerabilities"><i class="fa-brands fa-weibo fa-fw" aria-hidden=true></i></a>
 </span>
 </div>
 </div>
 </div>
 <div class=post-info-more>
-<section class=post-tags><i class="fa-solid fa-tags fa-fw me-1" aria-hidden=true></i><a href=/tags/infosec/ class=post-tag>infosec</a><a href=/tags/bugbounty/ class=post-tag>bugbounty</a><a href=/tags/synack/ class=post-tag>synack</a></section>
+<section class=post-tags><i class="fa-solid fa-tags fa-fw me-1" aria-hidden=true></i><a href=/tags/infosec/ class=post-tag>infosec</a><a href=/tags/bugbounty/ class=post-tag>bugbounty</a><a href=/tags/synack/ class=post-tag>synack</a><a href=/tags/cors/ class=post-tag>cors</a></section>
 <section>
 <span><a href=javascript:void(0); onclick=window.history.back()>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span>
 </section>
 </div>
-<div class=post-nav><a href=/posts/oscp/ class=post-nav-item rel=prev title="How I cleared OSCP in my First Attempt"><i class="fa-solid fa-angle-left fa-fw" aria-hidden=true></i>How I cleared OSCP in my First Attempt</a>
-<a href=/posts/tale-of-2/ class=post-nav-item rel=next title="Chaining the tale of 2 Vulnerabilities">Chaining the tale of 2 Vulnerabilities<i class="fa-solid fa-angle-right fa-fw" aria-hidden=true></i></a></div>
+<div class=post-nav><a href=/posts/bug-bounty-2022/ class=post-nav-item rel=prev title="Reflection on my Bug Bounty Journey 2022"><i class="fa-solid fa-angle-left fa-fw" aria-hidden=true></i>Reflection on my Bug Bounty Journey 2022</a></div>
 </div>
 </article></main><footer class=footer>
 <div class=footer-container><div class="footer-line copyright" itemscope itemtype=http://schema.org/CreativeWork><i class="fa-regular fa-copyright fa-fw" aria-hidden=true></i>
