@@ -1,0 +1,180 @@
+<!doctype html><html itemscope itemtype=http://schema.org/WebPage lang=en>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2">
+<meta name=robots content="noodp">
+<title>Reflection on my Bug Bounty Journey 2022 - 0xSh1v4 Blog</title><meta name=author content>
+<meta name=author-link content>
+<meta name=description content="Last year with Synack Red Team has been a wholesome experience for me."><meta name=keywords content="bug-bounty,synack"><meta itemprop=name content="Reflection on my Bug Bounty Journey 2022">
+<meta itemprop=description content="Last year with Synack Red Team has been a wholesome experience for me."><meta itemprop=datePublished content="2023-01-29T03:26:27+01:00">
+<meta itemprop=dateModified content="2023-01-29T03:26:27+01:00">
+<meta itemprop=wordCount content="440">
+<meta itemprop=keywords content="infosec,bugbounty,synack,"><meta property="og:title" content="Reflection on my Bug Bounty Journey 2022">
+<meta property="og:description" content="Last year with Synack Red Team has been a wholesome experience for me.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://0xsh1v4.github.io/posts/bug-bounty-2022/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2023-01-29T03:26:27+01:00">
+<meta property="article:modified_time" content="2023-01-29T03:26:27+01:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Reflection on my Bug Bounty Journey 2022">
+<meta name=twitter:description content="Last year with Synack Red Team has been a wholesome experience for me.">
+<meta name=application-name content="0xSh1v4">
+<meta name=apple-mobile-web-app-title content="0xSh1v4"><meta name=theme-color data-light=#f8f8f8 data-dark=#252627 content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=canonical href=https://0xsh1v4.github.io/posts/bug-bounty-2022/><link rel=prev href=https://0xsh1v4.github.io/posts/oscp/><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Reflection on my Bug Bounty Journey 2022","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/0xsh1v4.github.io\/posts\/bug-bounty-2022\/"},"genre":"posts","keywords":"infosec, bugbounty, synack","wordcount":440,"url":"https:\/\/0xsh1v4.github.io\/posts\/bug-bounty-2022\/","datePublished":"2023-01-29T03:26:27+01:00","dateModified":"2023-01-29T03:26:27+01:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"Siva Rajendran"},"description":""}</script></head>
+<body data-header-desktop=sticky data-header-mobile=auto><script>(window.localStorage?.getItem('theme')?localStorage.getItem('theme')==='dark':'auto'==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:'auto'==='dark')&&document.body.setAttribute('data-theme','dark')</script><div class=wrapper><header class="desktop animate__faster" id=header-desktop>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="0xSh1v4 Blog"><img class="lazyload logo" src=/svg/loading.min.svg data-src="https://en.gravatar.com/userimage/231079049/88f85f4c7b814b0c5901d48c6bd25e6b.png?size=200" data-srcset="https://en.gravatar.com/userimage/231079049/88f85f4c7b814b0c5901d48c6bd25e6b.png?size=200, https://en.gravatar.com/userimage/231079049/88f85f4c7b814b0c5901d48c6bd25e6b.png?size=200 1.5x, https://en.gravatar.com/userimage/231079049/88f85f4c7b814b0c5901d48c6bd25e6b.png?size=200 2x" data-sizes=auto alt="0xSh1v4 Blog" title="0xSh1v4 Blog"><span id=typeit-header-desktop class=typeit></span></a><span class=header-subtitle></span></div>
+<nav>
+<ul class=menu><li class=menu-item>
+<a class=menu-link href=/posts/><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden=true></i> Posts</a></li><li class=menu-item>
+<a class=menu-link href=/categories/><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden=true></i> Categories</a></li><li class=menu-item>
+<a class=menu-link href=/tags/><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden=true></i> Tags</a></li><li class="menu-item active has-children">
+<a class=menu-link href=/>Bug-Bounty</a><i class="dropdown-icon fa-solid fa-chevron-down" aria-hidden=true></i>
+<ul class=sub-menu>
+<li class="menu-item active">
+<a class=menu-link href=/posts/bug-bounty-2022/ title="Reflection on Bug Bounty Journey 2022"><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> Bug-Bounty 2022</a>
+</li></ul></li><li class="menu-item has-children">
+<a class=menu-link href=/>Certifications</a><i class="dropdown-icon fa-solid fa-chevron-down" aria-hidden=true></i>
+<ul class=sub-menu>
+<li class=menu-item>
+<a class=menu-link href=/posts/oscp/ title="Offensive Security Certified Professional Guide (OSCP)"><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> OSCP</a>
+</li></ul></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop>
+<input type=text placeholder="Search here" id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=Search>
+<i class="fa-solid fa-search fa-fw" aria-hidden=true></i>
+</a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=Clear>
+<i class="fa-solid fa-times-circle fa-fw" aria-hidden=true></i>
+</a>
+<span class="search-button search-loading" id=search-loading-desktop>
+<i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden=true></i>
+</span>
+</li><li class="menu-item theme-switch" title="Switch Theme">
+<i class="fa-solid fa-adjust fa-fw" aria-hidden=true></i>
+</li>
+</ul>
+</nav>
+</div>
+</header><header class="mobile animate__faster" id=header-mobile>
+<div class=header-container>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="0xSh1v4 Blog"><img class="lazyload logo" src=/svg/loading.min.svg data-src="https://en.gravatar.com/userimage/231079049/88f85f4c7b814b0c5901d48c6bd25e6b.png?size=200" data-srcset="https://en.gravatar.com/userimage/231079049/88f85f4c7b814b0c5901d48c6bd25e6b.png?size=200, https://en.gravatar.com/userimage/231079049/88f85f4c7b814b0c5901d48c6bd25e6b.png?size=200 1.5x, https://en.gravatar.com/userimage/231079049/88f85f4c7b814b0c5901d48c6bd25e6b.png?size=200 2x" data-sizes=auto alt="https://en.gravatar.com/userimage/231079049/88f85f4c7b814b0c5901d48c6bd25e6b.png?size=200" title="https://en.gravatar.com/userimage/231079049/88f85f4c7b814b0c5901d48c6bd25e6b.png?size=200"><span id=typeit-header-title-mobile class=typeit></span></a><span class=header-subtitle></span></div>
+<div class=menu-toggle id=menu-toggle-mobile>
+<span></span><span></span><span></span>
+</div>
+</div>
+<nav>
+<ul class=menu id=menu-mobile><li class=search-wrapper>
+<div class="search mobile" id=search-mobile>
+<input type=text placeholder="Search here" id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=Search>
+<i class="fa-solid fa-search fa-fw" aria-hidden=true></i>
+</a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=Clear>
+<i class="fa-solid fa-times-circle fa-fw" aria-hidden=true></i>
+</a>
+<span class="search-button search-loading" id=search-loading-mobile>
+<i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden=true></i>
+</span>
+</div>
+<a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
+Cancel
+</a>
+</li><li class=menu-item><a class=menu-link href=/posts/><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden=true></i> Posts</a></li><li class=menu-item><a class=menu-link href=/categories/><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden=true></i> Categories</a></li><li class=menu-item><a class=menu-link href=/tags/><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden=true></i> Tags</a></li><li class="menu-item active"><span class=nested-item>
+<a class=menu-link href=/>Bug-Bounty</a>
+<i class="dropdown-icon fa-solid fa-chevron-right" aria-hidden=true></i>
+</span>
+<ul class=sub-menu>
+<li class="menu-item active">
+<a class=menu-link href=/posts/bug-bounty-2022/ title="Reflection on Bug Bounty Journey 2022"><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> Bug-Bounty 2022</a>
+</li></ul></li><li class=menu-item><span class=nested-item>
+<a class=menu-link href=/>Certifications</a>
+<i class="dropdown-icon fa-solid fa-chevron-right" aria-hidden=true></i>
+</span>
+<ul class=sub-menu>
+<li class=menu-item>
+<a class=menu-link href=/posts/oscp/ title="Offensive Security Certified Professional Guide (OSCP)"><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> OSCP</a>
+</li></ul></li><li class="menu-item theme-switch" title="Switch Theme">
+<i class="fa-solid fa-adjust fa-fw" aria-hidden=true></i>
+</li></ul>
+</nav>
+</div>
+</header><div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div>
+</div>
+<div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div>
+</div><main class=container data-page-style=normal><aside class=toc id=toc-auto></aside>
+<aside class=aside-custom>
+</aside>
+<article class="page single">
+<div class=header><h1 class="single-title animate__animated animate__flipInX">
+<span title=Repost class=icon-repost><i class="fa-solid fa-share fa-fw" aria-hidden=true></i></span><span>Reflection on my Bug Bounty Journey 2022</span>
+</h1><p class="single-subtitle animate__animated animate__fadeIn">Synack Bug-bounty Program</p></div><div class=post-meta>
+<div class=post-meta-line><span class=post-author><span class=author><i class="fa-solid fa-user-circle" aria-hidden=true></i>
+Siva Rajendran</span></span>
+<span class=post-category>included in <a href=/categories/infosec/><i class="fa-regular fa-folder fa-fw" aria-hidden=true></i> Infosec</a>&ensp;<a href=/categories/bugbounty/><i class="fa-regular fa-folder fa-fw" aria-hidden=true></i> Bugbounty</a>&ensp;<a href=/categories/synack/><i class="fa-regular fa-folder fa-fw" aria-hidden=true></i> Synack</a></span></div>
+<div class=post-meta-line><span title="2023-01-29 03:26:27"><i class="fa-regular fa-calendar-alt fa-fw" aria-hidden=true></i>&nbsp;<time datetime=2023-01-29>2023-01-29</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw" aria-hidden=true></i> 440 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw" aria-hidden=true></i> 3 minutes</span>&nbsp;</div>
+</div><div class=content id=content><p>Last year with <a href=https://www.synack.com/red-team/ target=_blank rel="external nofollow noopener noreferrer">Synack Red</a> Team has been a wholesome experience for me.</p>
+<p>My journey with Synack started in October 2021, but I have only started to get more hands-on since February 2022. Within the span of next 10 months, I was managed to reach the <strong>Level 5</strong> in Synack and won <strong>15of15</strong> award twice in my <em>Level-1</em> and in my <em>Level-3</em>. Due to my performance, I was inducted to <a href=https://acropolis.synack.com/inductees/0xSh1v4/ target=_blank rel="external nofollow noopener noreferrer">Synack Acropolis</a> within 4-5 months.</p>
+<figure><img src=/acropolis.png><figcaption>
+<h4>Synack-Acropolis</h4>
+</figcaption>
+</figure>
+<p>The first few weeks in synack was completely new, Since it is a private bug bounty program and I had to learn lots of new procedures which they incorporated and had to follow it. Since everything was properly documented in their help-guide. This helped me alot to understand and their customer support and the community people on Slack channel were really helpful and quite fast.</p>
+<p>Synack only accept Impactful findings as a valid one. So for ex: findings like <em>Security headers</em> , <em>Cookie Flags</em>, <em>TLS/SSL</em> misconfigurations won&rsquo;t be accepted, unless you show an Impact on it. For ex: <em>phpinfo()</em> output won&rsquo;t be accepted as <em>sensitive Information exposure</em> until you show an <em>Account Takeover</em> possibility using that exposure. This gives me a new dimension and to always look for more Impactful finding during my every assessment. Not only that, they also thrives in report quality. This helped me alot to improve at my current work as well.</p>
+<p>After few weeks, I understood the process and expectation from synack and then I have started to find bugs and started to make a good report as well. This helped me to improve my report-writing skills as well. I won the first month <em>15of15</em> award for <em>Level-1</em> in synack and same during septemeber 2022 for the <em>Level-3</em> as well.</p>
+<figure><img src=/15.png><figcaption>
+<h4>Synack-15of15</h4>
+</figcaption>
+</figure>
+<p>Then, I have started to find more bugs on the platform on the regular basis. I have reported 58 vulnerabilities last year in below categories mentioned in the bar diagram. Majority of the vulnerabilities are from the categories <em>Cross-Site Scripting</em> and <em>Access Control/IDORs</em></p>
+<figure><img src=/overview.png><figcaption>
+<h4>Overview of my Reported Findings Category 2022</h4>
+</figcaption>
+</figure>
+<p>I have received the <em>coins</em> for each level from synack as a token of appreciation along with their first-vulnerabiliy swag, which they give to <em>SRT</em> for finding their first vulnerability on the platform.</p>
+<figure><img src=/coins.jpeg><figcaption>
+<h4>Synack-Coins</h4>
+</figcaption>
+</figure>
+<p>By end of the year, I managed to reach <strong>Level-5</strong> in Synack. Personally, It was a great amount of learning and findings bugs and competeting with best hackers around the world. I would like to find more vulnerabilities in 2023 and also focus on the other vulnerabilities categories as well.</p>
+<blockquote class=twitter-tweet><p lang=en dir=ltr>Leveled up to 0x05! <a href=https://t.co/B7hPbyGa72>pic.twitter.com/B7hPbyGa72</a> via <a href="https://twitter.com/SynackRedTeam?ref_src=twsrc%5Etfw">@SynackRedTeam</a></p>&mdash; Siva Rajendran (@0xSh1v4) <a href="https://twitter.com/0xSh1v4/status/1601358641915125760?ref_src=twsrc%5Etfw">December 9, 2022</a></blockquote>
+<script async src=https://platform.twitter.com/widgets.js></script></div><div class=post-footer id=post-footer>
+<div class=post-info>
+<div class=post-info-line>
+<div class=post-info-mod>
+<span title="2023-01-29 03:26:27">Updated on 2023-01-29&nbsp;</span>
+</div></div>
+<div class=post-info-line>
+<div class=post-info-md></div>
+<div class=post-info-share>
+<span><a href=javascript:void(0); title="Share on Twitter" data-sharer=twitter data-url=https://0xsh1v4.github.io/posts/bug-bounty-2022/ data-title="Reflection on my Bug Bounty Journey 2022" data-via="map[id:@0xSh1v4 prefix:https://twitter.com/ title:Twitter weight:0]" data-hashtags=infosec,bugbounty,synack><i class="fa-brands fa-twitter fa-fw" aria-hidden=true></i></a>
+<a href=javascript:void(0); title="Share on Linkedin" data-sharer=linkedin data-url=https://0xsh1v4.github.io/posts/bug-bounty-2022/><i class="fa-brands fa-linkedin fa-fw" aria-hidden=true></i></a>
+<a href=javascript:void(0); title="Share on Xing" data-sharer=xing data-url=https://0xsh1v4.github.io/posts/bug-bounty-2022/ data-title="Reflection on my Bug Bounty Journey 2022"><i class="fa-brands fa-xing fa-fw" aria-hidden=true></i></a>
+<a href=javascript:void(0); title="Share on 微博" data-sharer=weibo data-url=https://0xsh1v4.github.io/posts/bug-bounty-2022/ data-title="Reflection on my Bug Bounty Journey 2022"><i class="fa-brands fa-weibo fa-fw" aria-hidden=true></i></a>
+</span>
+</div>
+</div>
+</div>
+<div class=post-info-more>
+<section class=post-tags><i class="fa-solid fa-tags fa-fw me-1" aria-hidden=true></i><a href=/tags/infosec/ class=post-tag>infosec</a><a href=/tags/bugbounty/ class=post-tag>bugbounty</a><a href=/tags/synack/ class=post-tag>synack</a></section>
+<section>
+<span><a href=javascript:void(0); onclick=window.history.back()>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span>
+</section>
+</div>
+<div class=post-nav><a href=/posts/oscp/ class=post-nav-item rel=prev title="How I cleared OSCP in my First Attempt"><i class="fa-solid fa-angle-left fa-fw" aria-hidden=true></i>How I cleared OSCP in my First Attempt</a></div>
+</div>
+</article></main><footer class=footer>
+<div class=footer-container><div class="footer-line copyright" itemscope itemtype=http://schema.org/CreativeWork><i class="fa-regular fa-copyright fa-fw" aria-hidden=true></i>
+<span itemprop=copyrightYear>2022 - 2023</span><span class=author itemprop=copyrightHolder>
+<a href=/></a></span></div><div class="footer-line statistics"><span class=site-time title="Website running ..."><i class="fa-solid fa-heartbeat fa-fw animate-icon" aria-hidden=true></i><span class="run-times ms-1">Website running ...</span></span></div></div>
+</footer></div><div class=widgets><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role=button aria-label="Back to Top"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden=true></i><span class="variant-numeric d-none">0%</span>
+</div></div><div id=mask></div><noscript>
+<div class=noscript-warning>Theme FixIt works best with JavaScript enabled.</div>
+</noscript>
+</div><link rel=stylesheet href=/lib/lightgallery/css/lightgallery-bundle.min.css><link rel=stylesheet href=/lib/cookieconsent/cookieconsent.min.css><link rel=stylesheet href=/lib/pace/themes/green/pace-theme-minimal.css><script src=/lib/autocomplete/autocomplete.min.js defer></script><script src=/lib/lunr/lunr.min.js defer></script><script src=/lib/lazysizes/lazysizes.min.js async defer></script><script src=/lib/twemoji/twemoji.min.js defer></script><script src=/lib/lightgallery/lightgallery.min.js defer></script><script src=/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js defer></script><script src=/lib/lightgallery/plugins/zoom/lg-zoom.min.js defer></script><script src=/lib/sharer/sharer.min.js async defer></script><script src=/lib/typeit/index.umd.js defer></script><script src=/lib/cookieconsent/cookieconsent.min.js defer></script><script src=/lib/pace/pace.min.js async defer></script><script>window.config={code:{copyTitle:"Copy to clipboard",editLockTitle:"Lock editable code block",editUnLockTitle:"Unlock editable code block",editable:!0,maxShownLines:10},comment:{enable:!1},cookieconsent:{content:{dismiss:"Got it!",link:"Learn more",message:"This website uses Cookies to improve your experience."},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},data:{"typeit-header-desktop":"[root@0xSh1v4:]","typeit-header-title-mobile":"[root@0xSh1v4:]"},lightgallery:!0,search:{highlightTag:"em",lunrIndexURL:"/index.json",maxResultLength:10,noResultsFound:"No results found",snippetLength:30,type:"lunr"},twemoji:!0,typeit:{cursorChar:"|",cursorSpeed:1e3,data:{"typeit-header-desktop":["typeit-header-desktop"],"typeit-header-title-mobile":["typeit-header-title-mobile"]},duration:-1,speed:100}}</script><script src=/js/theme.min.js defer></script></body>
+</html>
