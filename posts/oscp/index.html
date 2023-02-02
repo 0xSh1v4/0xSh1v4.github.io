@@ -8,7 +8,7 @@
 <meta name=description content="In this blog, I am going to share my experience on OSCP and provide you guys some tip which might be useful for those who are preparaing for their OSCP exam. Since I took the recent OSCP exam which Includes the Active Directory structure as well. I would share some tips on this part as well."><meta name=keywords content="oscp"><meta itemprop=name content="How I cleared OSCP in my First Attempt">
 <meta itemprop=description content="In this blog, I am going to share my experience on OSCP and provide you guys some tip which might be useful for those who are preparaing for their OSCP exam. Since I took the recent OSCP exam which Includes the Active Directory structure as well. I would share some tips on this part as well."><meta itemprop=datePublished content="2022-12-26T03:26:27+01:00">
 <meta itemprop=dateModified content="2022-12-26T03:26:27+01:00">
-<meta itemprop=wordCount content="1479">
+<meta itemprop=wordCount content="1494">
 <meta itemprop=keywords content="infosec,oscp,offsec,"><meta property="og:title" content="How I cleared OSCP in my First Attempt">
 <meta property="og:description" content="In this blog, I am going to share my experience on OSCP and provide you guys some tip which might be useful for those who are preparaing for their OSCP exam. Since I took the recent OSCP exam which Includes the Active Directory structure as well. I would share some tips on this part as well.">
 <meta property="og:type" content="article">
@@ -21,7 +21,7 @@
 <meta name=application-name content="0xSh1v4">
 <meta name=apple-mobile-web-app-title content="0xSh1v4"><meta name=theme-color data-light=#f8f8f8 data-dark=#252627 content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=canonical href=https://0xsh1v4.github.io/posts/oscp/><link rel=next href=https://0xsh1v4.github.io/posts/bug-bounty-2022/><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"How I cleared OSCP in my First Attempt","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/0xsh1v4.github.io\/posts\/oscp\/"},"genre":"posts","keywords":"infosec, oscp, offsec","wordcount":1479,"url":"https:\/\/0xsh1v4.github.io\/posts\/oscp\/","datePublished":"2022-12-26T03:26:27+01:00","dateModified":"2022-12-26T03:26:27+01:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"Siva Rajendran"},"description":""}</script></head>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=canonical href=https://0xsh1v4.github.io/posts/oscp/><link rel=next href=https://0xsh1v4.github.io/posts/bug-bounty-2022/><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"How I cleared OSCP in my First Attempt","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/0xsh1v4.github.io\/posts\/oscp\/"},"genre":"posts","keywords":"infosec, oscp, offsec","wordcount":1494,"url":"https:\/\/0xsh1v4.github.io\/posts\/oscp\/","datePublished":"2022-12-26T03:26:27+01:00","dateModified":"2022-12-26T03:26:27+01:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"Siva Rajendran"},"description":""}</script></head>
 <body data-header-desktop=sticky data-header-mobile=auto><script>(window.localStorage?.getItem('theme')?localStorage.getItem('theme')==='dark':'auto'==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:'auto'==='dark')&&document.body.setAttribute('data-theme','dark')</script><div class=wrapper><header class="desktop animate__faster" id=header-desktop>
 <div class=header-wrapper>
 <div class=header-title>
@@ -133,7 +133,7 @@ Cancel
 <div class=post-meta-line><span class=post-author><span class=author><i class="fa-solid fa-user-circle" aria-hidden=true></i>
 Siva Rajendran</span></span>
 <span class=post-category>included in <a href=/categories/infosec/><i class="fa-regular fa-folder fa-fw" aria-hidden=true></i> Infosec</a>&ensp;<a href=/categories/certifications/><i class="fa-regular fa-folder fa-fw" aria-hidden=true></i> Certifications</a>&ensp;<a href=/categories/offsec/><i class="fa-regular fa-folder fa-fw" aria-hidden=true></i> OffSec</a></span></div>
-<div class=post-meta-line><span title="2022-12-26 03:26:27"><i class="fa-regular fa-calendar-alt fa-fw" aria-hidden=true></i>&nbsp;<time datetime=2022-12-26>2022-12-26</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw" aria-hidden=true></i> 1479 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw" aria-hidden=true></i> 7 minutes</span>&nbsp;</div>
+<div class=post-meta-line><span title="2022-12-26 03:26:27"><i class="fa-regular fa-calendar-alt fa-fw" aria-hidden=true></i>&nbsp;<time datetime=2022-12-26>2022-12-26</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw" aria-hidden=true></i> 1494 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw" aria-hidden=true></i> 8 minutes</span>&nbsp;</div>
 </div><div class="details toc" id=toc-static data-kept=false>
 <div class="details-summary toc-title">
 <span>Contents</span>
@@ -227,19 +227,22 @@ Siva Rajendran</span></span>
 <p>First the OSCP Labs and course materials provided by <em>OFFSEC</em>, make sure to finish the exercises and have 10 bonus points. You never know, when It might come In Handy.</p>
 </li>
 <li>
-<p>If you want to Improve on Active Directory: <a href=https://bootcamps.pentesteracademy.com/course/ad-beginner-jan-23 target=_blank rel="external nofollow noopener noreferrer">Certified Red Team Professional (CRTP)</a></p>
+<p>If you want to improve more on Active Directory: <a href=https://bootcamps.pentesteracademy.com/course/ad-beginner-jan-23 target=_blank rel="external nofollow noopener noreferrer">Certified Red Team Professional (CRTP)</a></p>
 </li>
 <li>
 <p>Buffer Overflow Room from <a href=https://tryhackme.com/room/bufferoverflowprep target=_blank rel="external nofollow noopener noreferrer">TryHackMe-BufferOverFlow Room</a></p>
 </li>
 <li>
-<p>Defintely recommend this subscription for a month or so in <a href=https://www.offensive-security.com/labs/individual/ target=_blank rel="external nofollow noopener noreferrer">Proving Grounds Practice</a></p>
+<p>Definitely recommend this subscription for a month or so in <a href=https://www.offensive-security.com/labs/individual/ target=_blank rel="external nofollow noopener noreferrer">Proving Grounds Practice</a></p>
 </li>
 <li>
 <p>The Following proving grounds machines from <em>TJ-Null List</em></p>
 </li>
+<li>
+<p>Try to do as many machines as possible especially the machines created by <em>@offsec</em></p>
+</li>
 </ul>
-<figure><img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/268a1412-c256-4b74-8426-407b5e4fd71a/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20230129%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20230129T191648Z&X-Amz-Expires=86400&X-Amz-Signature=d609c1947f6b1bd30c8d538b115a973d7237098e9943ef92a25ef081a0fff64f&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject"><figcaption>
+<figure><img src=/pg.png><figcaption>
 <h4>Proving Grounds Practice</h4>
 </figcaption>
 </figure>
