@@ -1,0 +1,234 @@
+<!doctype html><html itemscope itemtype=http://schema.org/WebPage lang=en>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2">
+<meta name=robots content="noodp">
+<title>Connect between .htaccess and file upload bypass - 0xSh1v4 Blog</title><meta name=author content>
+<meta name=author-link content>
+<meta name=description content="This blog contains the Information about the php file upload bypass and the role of .htaccess file in this bypass."><meta name=keywords content="php,fileupload,bypass"><meta itemprop=name content="Connect between .htaccess and file upload bypass">
+<meta itemprop=description content="This blog contains the Information about the php file upload bypass and the role of .htaccess file in this bypass."><meta itemprop=datePublished content="2023-01-15T03:26:27+01:00">
+<meta itemprop=dateModified content="2023-01-15T03:26:27+01:00">
+<meta itemprop=wordCount content="359">
+<meta itemprop=keywords content="infosec,fileupload,php,"><meta property="og:title" content="Connect between .htaccess and file upload bypass">
+<meta property="og:description" content="This blog contains the Information about the php file upload bypass and the role of .htaccess file in this bypass.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://0xsh1v4.github.io/posts/php-file-upload-bypass/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2023-01-15T03:26:27+01:00">
+<meta property="article:modified_time" content="2023-01-15T03:26:27+01:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Connect between .htaccess and file upload bypass">
+<meta name=twitter:description content="This blog contains the Information about the php file upload bypass and the role of .htaccess file in this bypass.">
+<meta name=application-name content="0xSh1v4">
+<meta name=apple-mobile-web-app-title content="0xSh1v4"><meta name=theme-color data-light=#f8f8f8 data-dark=#252627 content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=canonical href=https://0xsh1v4.github.io/posts/php-file-upload-bypass/><link rel=prev href=https://0xsh1v4.github.io/posts/bug-bounty-2022/><link rel=next href=https://0xsh1v4.github.io/posts/tale-of-2/><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Connect between .htaccess and file upload bypass","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/0xsh1v4.github.io\/posts\/php-file-upload-bypass\/"},"genre":"posts","keywords":"infosec, fileupload, php","wordcount":359,"url":"https:\/\/0xsh1v4.github.io\/posts\/php-file-upload-bypass\/","datePublished":"2023-01-15T03:26:27+01:00","dateModified":"2023-01-15T03:26:27+01:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"Siva Rajendran"},"description":""}</script></head>
+<body data-header-desktop=sticky data-header-mobile=auto><script>(window.localStorage?.getItem('theme')?localStorage.getItem('theme')==='dark':'auto'==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:'auto'==='dark')&&document.body.setAttribute('data-theme','dark')</script><div class=wrapper><header class="desktop animate__faster" id=header-desktop>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="0xSh1v4 Blog"><img class="lazyload logo" src=/svg/loading.min.svg data-src="https://en.gravatar.com/userimage/231079049/88f85f4c7b814b0c5901d48c6bd25e6b.png?size=200" data-srcset="https://en.gravatar.com/userimage/231079049/88f85f4c7b814b0c5901d48c6bd25e6b.png?size=200, https://en.gravatar.com/userimage/231079049/88f85f4c7b814b0c5901d48c6bd25e6b.png?size=200 1.5x, https://en.gravatar.com/userimage/231079049/88f85f4c7b814b0c5901d48c6bd25e6b.png?size=200 2x" data-sizes=auto alt="0xSh1v4 Blog" title="0xSh1v4 Blog"><span id=typeit-header-desktop class=typeit></span></a><span class=header-subtitle></span></div>
+<nav>
+<ul class=menu><li class=menu-item>
+<a class=menu-link href=/posts/><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden=true></i> Posts</a></li><li class=menu-item>
+<a class=menu-link href=/tags/><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden=true></i> Tags</a></li><li class="menu-item has-children">
+<a class=menu-link href=/>Bug-Bounty</a><i class="dropdown-icon fa-solid fa-chevron-down" aria-hidden=true></i>
+<ul class=sub-menu>
+<li class=menu-item>
+<a class=menu-link href=/posts/bug-bounty-2022/ title="Reflection on Bug Bounty Journey 2022"><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> Bug-Bounty 2022</a>
+</li><li class=menu-item>
+<a class=menu-link href=/posts/tale-of-2/ title="A tale of 2 Vulnerabilities"><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> Tale of 2</a>
+</li></ul></li><li class="menu-item has-children">
+<a class=menu-link href=/>Certifications</a><i class="dropdown-icon fa-solid fa-chevron-down" aria-hidden=true></i>
+<ul class=sub-menu>
+<li class=menu-item>
+<a class=menu-link href=/posts/oscp/ title="Offensive Security Certified Professional Guide (OSCP)"><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> OSCP</a>
+</li></ul></li><li class="menu-item active has-children">
+<a class=menu-link href=/>Web</a><i class="dropdown-icon fa-solid fa-chevron-down" aria-hidden=true></i>
+<ul class=sub-menu>
+<li class="menu-item active">
+<a class=menu-link href=/posts/php-file-upload-bypass/ title="File upload bypass using .htaccess"><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> File upload bypass</a>
+</li></ul></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop>
+<input type=text placeholder="Search here" id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=Search>
+<i class="fa-solid fa-search fa-fw" aria-hidden=true></i>
+</a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=Clear>
+<i class="fa-solid fa-times-circle fa-fw" aria-hidden=true></i>
+</a>
+<span class="search-button search-loading" id=search-loading-desktop>
+<i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden=true></i>
+</span>
+</li><li class="menu-item theme-switch" title="Switch Theme">
+<i class="fa-solid fa-adjust fa-fw" aria-hidden=true></i>
+</li>
+</ul>
+</nav>
+</div>
+</header><header class="mobile animate__faster" id=header-mobile>
+<div class=header-container>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="0xSh1v4 Blog"><img class="lazyload logo" src=/svg/loading.min.svg data-src="https://en.gravatar.com/userimage/231079049/88f85f4c7b814b0c5901d48c6bd25e6b.png?size=200" data-srcset="https://en.gravatar.com/userimage/231079049/88f85f4c7b814b0c5901d48c6bd25e6b.png?size=200, https://en.gravatar.com/userimage/231079049/88f85f4c7b814b0c5901d48c6bd25e6b.png?size=200 1.5x, https://en.gravatar.com/userimage/231079049/88f85f4c7b814b0c5901d48c6bd25e6b.png?size=200 2x" data-sizes=auto alt="https://en.gravatar.com/userimage/231079049/88f85f4c7b814b0c5901d48c6bd25e6b.png?size=200" title="https://en.gravatar.com/userimage/231079049/88f85f4c7b814b0c5901d48c6bd25e6b.png?size=200"><span id=typeit-header-title-mobile class=typeit></span></a><span class=header-subtitle></span></div>
+<div class=menu-toggle id=menu-toggle-mobile>
+<span></span><span></span><span></span>
+</div>
+</div>
+<nav>
+<ul class=menu id=menu-mobile><li class=search-wrapper>
+<div class="search mobile" id=search-mobile>
+<input type=text placeholder="Search here" id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=Search>
+<i class="fa-solid fa-search fa-fw" aria-hidden=true></i>
+</a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=Clear>
+<i class="fa-solid fa-times-circle fa-fw" aria-hidden=true></i>
+</a>
+<span class="search-button search-loading" id=search-loading-mobile>
+<i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden=true></i>
+</span>
+</div>
+<a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
+Cancel
+</a>
+</li><li class=menu-item><a class=menu-link href=/posts/><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden=true></i> Posts</a></li><li class=menu-item><a class=menu-link href=/tags/><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden=true></i> Tags</a></li><li class=menu-item><span class=nested-item>
+<a class=menu-link href=/>Bug-Bounty</a>
+<i class="dropdown-icon fa-solid fa-chevron-right" aria-hidden=true></i>
+</span>
+<ul class=sub-menu>
+<li class=menu-item>
+<a class=menu-link href=/posts/bug-bounty-2022/ title="Reflection on Bug Bounty Journey 2022"><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> Bug-Bounty 2022</a>
+</li><li class=menu-item>
+<a class=menu-link href=/posts/tale-of-2/ title="A tale of 2 Vulnerabilities"><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> Tale of 2</a>
+</li></ul></li><li class=menu-item><span class=nested-item>
+<a class=menu-link href=/>Certifications</a>
+<i class="dropdown-icon fa-solid fa-chevron-right" aria-hidden=true></i>
+</span>
+<ul class=sub-menu>
+<li class=menu-item>
+<a class=menu-link href=/posts/oscp/ title="Offensive Security Certified Professional Guide (OSCP)"><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> OSCP</a>
+</li></ul></li><li class="menu-item active"><span class=nested-item>
+<a class=menu-link href=/>Web</a>
+<i class="dropdown-icon fa-solid fa-chevron-right" aria-hidden=true></i>
+</span>
+<ul class=sub-menu>
+<li class="menu-item active">
+<a class=menu-link href=/posts/php-file-upload-bypass/ title="File upload bypass using .htaccess"><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> File upload bypass</a>
+</li></ul></li><li class="menu-item theme-switch" title="Switch Theme">
+<i class="fa-solid fa-adjust fa-fw" aria-hidden=true></i>
+</li></ul>
+</nav>
+</div>
+</header><div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div>
+</div>
+<div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div>
+</div><main class=container data-page-style=normal><aside class=toc id=toc-auto><h2 class=toc-title>Contents&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden=true></i></h2>
+<div class=toc-content id=toc-content-auto></div></aside>
+<aside class=aside-custom>
+</aside>
+<article class="page single">
+<div class=header><h1 class="single-title animate__animated animate__flipInX">
+<span title=Repost class=icon-repost><i class="fa-solid fa-share fa-fw" aria-hidden=true></i></span><span>Connect between .htaccess and file upload bypass</span>
+</h1><p class="single-subtitle animate__animated animate__fadeIn">PHP File Upload Bypass</p></div><div class=post-meta>
+<div class=post-meta-line><span class=post-author><span class=author><i class="fa-solid fa-user-circle" aria-hidden=true></i>
+Siva Rajendran</span></span>
+<span class=post-category>included in <a href=/categories/infosec/><i class="fa-regular fa-folder fa-fw" aria-hidden=true></i> Infosec</a>&ensp;<a href=/categories/fileupload/><i class="fa-regular fa-folder fa-fw" aria-hidden=true></i> Fileupload</a>&ensp;<a href=/categories/php/><i class="fa-regular fa-folder fa-fw" aria-hidden=true></i> php</a></span></div>
+<div class=post-meta-line><span title="2023-01-15 03:26:27"><i class="fa-regular fa-calendar-alt fa-fw" aria-hidden=true></i>&nbsp;<time datetime=2023-01-15>2023-01-15</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw" aria-hidden=true></i> 359 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw" aria-hidden=true></i> 2 minutes</span>&nbsp;</div>
+</div><div class="details toc" id=toc-static data-kept=false>
+<div class="details-summary toc-title">
+<span>Contents</span>
+<span><i class="details-icon fa-solid fa-angle-right" aria-hidden=true></i></span>
+</div>
+<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li><a href=#bypass-file-extensions-checks>Bypass file extensions checks</a></li>
+<li><a href=#using-htaccess>Using .htaccess</a></li>
+</ul>
+</li>
+</ul>
+</nav></div>
+</div><div class=content id=content><p>This blog contains the Information about the php file upload bypass and the role of <em>.htaccess</em> file in this bypass.</p>
+<p>I came across a web application which had a upload function to upload the ticket into the application. The application was built using <em>php</em> and by doing further enumeration, I came across the <em>uploads</em> folder which contains the uploaded file. But the application had restricted me to upload any kind any potential file extensions listed below due to the validation.</p>
+<pre tabindex=0><code>[ .php, .php2, .php3, .php4, .php5, .php6, .php7, .phps, .phps, .pht, .phtm, .phtml, .pgif, .shtml, .phar and .inc ]
+</code></pre><h3 id=bypass-file-extensions-checks>Bypass file extensions checks</h3>
+<p>I came across this nice article <a href=https://gitbook.seguranca-informatica.pt/cheat-sheet-1/web/file-upload-bypass target=_blank rel="external nofollow noopener noreferrer">file-upload-bypass</a> and made curated list of all bypasses to check via burp intruder and to see If anything passes through.</p>
+<pre tabindex=0><code>file.php%20
+file.php%0a
+file.php%00
+file.php%0d%0a
+file.php/
+file.php.\
+file.
+file.php....
+file.pHp5....
+file.png.php
+file.png.pHp5
+file.php%00.png
+file.php\x00.png
+file.php%0a.png
+file.php%0d%0a.png
+flile.phpJunk123png
+</code></pre><p>Luckily the extension <em>file.php&mldr;</em> (3 dots after the filename) was able to bypass this file upload restriction and I could able to find the <em>file.php</em> inside the <em>uploads</em> directory. Now this confirmed the it was possible to bypass the file extension. I have tried to upload the <em>simple php backdoor file</em> which is by default available on kali machine.</p>
+<figure><img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/0dec72ec-04d1-47ad-9220-3f1dda52384b/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20230131%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20230131T153538Z&X-Amz-Expires=86400&X-Amz-Signature=897f678499adf319ad40a75a1846e949fc63673cc99ba9aea2f243ad56bb7707&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject"><figcaption>
+<h4>Upload our simple php backdoor</h4>
+</figcaption>
+</figure>
+<p>Now it is straight forward and we could do the <strong>command execution</strong> by accessing this file from <em>upload</em> directory.</p>
+<figure><img src=/upload><figcaption>
+<h4>RCE via File Upload</h4>
+</figcaption>
+</figure>
+<h3 id=using-htaccess>Using .htaccess</h3>
+<p>It is found that users can upload <strong>.htaccess</strong> files. We can take advantage of this to get code execution. The <strong>.htaccess</strong> file is not an RCE vector by itself, but it allows the creation of new legitimate PHP extensions that are allowed by the web application.</p>
+<p>Now we could create our own php extension and mention it via .htaccess file.</p>
+<p>Now our .htaccess file looks like:</p>
+<pre tabindex=0><code>
+AddType application/x-httpd-php .rce
+
+</code></pre><p>Now we could upload a file <code>shell.rce</code> which contains our simple-backdoor.php script and the .htaccess consider this as php file in that directory and now we could achieve the RCE same like before.</p>
+<p>I found a nice article below to get more indepth analysis on the file-upload bypass. Definitely give a read here.</p>
+<a href=https://thibaud-robin.fr/articles/bypass-filter-upload/ title=.htaccess target=_blank rel="external nofollow noopener noreferrer" class=card-link><span class=cl-backdrop style=--cl-bg-url:url(/fixit.min.svg)></span>
+<span class=cl-content>
+<span class=cl-text>
+<span class=cl-title>File-Upload Bypass</span>
+<span class=cl-meta><svg class="cl-icon-link" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path d="M574 665.4c-3.1-3.1-8.2-3.1-11.3.0L446.5 781.6c-53.8 53.8-144.6 59.5-204 0-59.5-59.5-53.8-150.2.0-204l116.2-116.2c3.1-3.1 3.1-8.2.0-11.3l-39.8-39.8c-3.1-3.1-8.2-3.1-11.3.0L191.4 526.5c-84.6 84.6-84.6 221.5.0 306s221.5 84.6 306 0l116.2-116.2c3.1-3.1 3.1-8.2.0-11.3L574 665.4zm258.6-474c-84.6-84.6-221.5-84.6-306 0L410.3 307.6c-3.1 3.1-3.1 8.2.0 11.3l39.7 39.7c3.1 3.1 8.2 3.1 11.3.0l116.2-116.2c53.8-53.8 144.6-59.5 204 0 59.5 59.5 53.8 150.2.0 204L665.3 562.6c-3.1 3.1-3.1 8.2.0 11.3l39.8 39.8c3.1 3.1 8.2 3.1 11.3.0l116.2-116.2c84.5-84.6 84.5-221.5.0-306.1z" fill="#a9a9b3"/><path d="M610.1 372.3c-3.1-3.1-8.2-3.1-11.3.0L372.3 598.7c-3.1 3.1-3.1 8.2.0 11.3l39.6 39.6c3.1 3.1 8.2 3.1 11.3.0l226.4-226.4c3.1-3.1 3.1-8.2.0-11.3l-39.5-39.6z" fill="#a9a9b3"/></svg>
+<span class=cl-url>https://thibaud-robin.fr/articles/bypass-filter-upload/</span>
+</span>
+</span><svg class="cl-icon-globe" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="64" height="64"><path d="M960 512c0 249.408-203.2 448-448 448-244.778667.0-448-198.592-448-448S262.592 64 512 64s448 198.592 448 448" fill="#2196f3"/><path d="M507.52 718.08c0-8.96-4.48-13.44-13.44-17.92-26.88-8.96-53.76-8.96-76.16-31.381333-4.48-8.96-4.48-17.92-8.96-26.88-8.96-8.96-31.36-13.44-44.8-17.92h-89.6c-13.44-4.48-22.4-22.4-31.36-35.84.0-4.48.0-13.461333-8.96-13.461334-8.96-4.458667-17.92 4.501333-26.88.0-4.48-4.458667-4.48-8.96-4.48-13.418666.0-13.461333 8.96-26.901333 17.92-35.861334 13.44-8.96 26.88 4.48 40.32 4.48 4.48.0 4.48.0 8.96 4.48 13.44 4.48 17.92 22.4 17.92 35.861334v8.96c0 4.48 4.48 4.48 8.96 4.48 4.48-22.4 4.48-44.821333 8.96-67.2.0-26.88 26.88-53.781333 49.28-62.72 8.96-4.458667 13.44 4.501333 22.4.0 26.88-8.96 94.08-35.84 80.64-71.658667-8.96-31.381333-35.84-62.698667-71.68-58.24-8.96 4.501333-13.44 8.96-22.4 13.461333-13.44 8.96-40.32 35.84-53.76 35.84-22.4-4.48-22.4-35.84-17.92-49.301333 4.48-17.92 44.8-76.138667 71.68-67.178667l17.92 17.92c8.96 4.48 22.4 4.48 35.84 4.48 4.48.0 8.96.0 13.44-4.48s4.48-4.48 4.48-8.96c0-13.44-13.44-26.901333-22.4-35.861333s-22.4-17.92-35.84-22.378667c-44.8-13.461333-116.48 4.458667-152.32 35.84-35.84 31.36-62.72 85.12-80.64 129.92-8.96 26.88-17.92 62.698667-22.4 94.08-4.48 22.4-8.96 40.32 4.48 62.698667 13.44 26.88 40.32 53.781333 67.2 71.68 17.92 13.44 53.76 13.44 71.68 35.84 13.44 17.941333 8.96 40.32 8.96 62.72.0 26.88 17.92 49.28 26.88 71.658667C305.92 785.28 310.4 803.2 314.88 816.64c0 4.48 4.48 31.36 4.48 35.84 26.88 13.44 49.28 26.901333 80.64 35.861333 4.48.0 22.4-26.901333 22.4-31.381333 13.44-13.44 22.4-31.36 35.84-40.32 8.96-4.48 17.92-8.96 26.88-17.941333 8.96-8.96 13.44-26.88 17.92-40.32C507.52 749.44 512 731.52 507.52 718.08M516.48 305.92c4.48.0 8.96-4.48 17.92-8.96 13.44-8.96 26.901333-22.4 40.32-31.36 13.461333-8.96 26.901333-22.4 35.861333-31.36 13.44-8.96 22.4-26.88 26.88-40.341333 4.48-8.96 17.941333-26.88 13.44-40.32-4.48-8.96-26.88-13.44-35.84-17.92C579.2 126.698667 547.84 122.24 512 122.24c-13.44.0-31.36 4.458667-35.84 17.92-4.48 22.4 13.44 17.92 31.36 22.4.0.0 4.48 35.84 4.48 40.32 4.48 22.421333-8.96 35.84-8.96 58.24.0 13.44.0 35.84 8.96 44.8h4.48zM892.8 619.52c4.501333-8.96 4.501333-22.4 8.96-31.36 4.501333-22.421333 4.501333-44.8 4.501333-67.2.0-44.8-4.501333-89.578667-17.92-129.92-8.96-13.44-13.461333-26.88-17.941333-40.341333C861.44 328.32 848 305.898667 830.08 288c-17.92-22.4-40.341333-85.12-80.64-67.2-13.44 4.501333-22.4 22.421333-31.36 31.381333l-26.88 40.32c-4.501333 4.48-8.96 13.44-4.501333 17.92.0 4.48 4.501333 4.48 8.96 4.48 8.96 4.501333 13.461333 4.501333 22.421333 8.96 4.48.0 8.96 4.501333 4.48 8.96.0.0.0 4.501333-4.48 4.501334-22.421333 22.4-44.8 40.32-67.2 62.698666-4.48 4.48-8.96 13.44-8.96 17.92s4.48 4.48 4.48 8.96c0 4.501333-4.48 4.501333-8.96 8.96-8.96 4.501333-17.92 8.96-22.4 13.461334-4.48 8.96.0 22.4-4.48 31.36-4.48 22.4-17.941333 40.32-26.901333 62.72-8.96 13.418667-13.418667 26.88-22.378667 40.32.0 17.92-4.501333 31.36 4.458667 44.8 22.421333 31.36 62.72 13.44 94.08 26.901333 8.96 4.458667 17.92 4.458667 22.421333 13.418667C695.658667 682.304 695.658667 704.704 700.16 718.144c4.458667 17.92 8.96 35.84 17.92 53.76 4.48 22.421333 13.44 44.821333 17.92 62.72 40.341333-31.36 76.16-67.178667 103.04-112 26.88-31.424 40.341333-67.242667 53.76-103.104" fill="#cddc39"/></svg></span></a></div><div class=post-footer id=post-footer>
+<div class=post-info>
+<div class=post-info-line>
+<div class=post-info-mod>
+<span title="2023-01-15 03:26:27">Updated on 2023-01-15&nbsp;</span>
+</div></div>
+<div class=post-info-line>
+<div class=post-info-md></div>
+<div class=post-info-share>
+<span><a href=javascript:void(0); title="Share on Twitter" data-sharer=twitter data-url=https://0xsh1v4.github.io/posts/php-file-upload-bypass/ data-title="Connect between .htaccess and file upload bypass" data-via="map[id:@0xSh1v4 prefix:https://twitter.com/ title:Twitter weight:0]" data-hashtags=infosec,fileupload,php><i class="fa-brands fa-twitter fa-fw" aria-hidden=true></i></a>
+<a href=javascript:void(0); title="Share on Linkedin" data-sharer=linkedin data-url=https://0xsh1v4.github.io/posts/php-file-upload-bypass/><i class="fa-brands fa-linkedin fa-fw" aria-hidden=true></i></a>
+<a href=javascript:void(0); title="Share on Xing" data-sharer=xing data-url=https://0xsh1v4.github.io/posts/php-file-upload-bypass/ data-title="Connect between .htaccess and file upload bypass"><i class="fa-brands fa-xing fa-fw" aria-hidden=true></i></a>
+<a href=javascript:void(0); title="Share on 微博" data-sharer=weibo data-url=https://0xsh1v4.github.io/posts/php-file-upload-bypass/ data-title="Connect between .htaccess and file upload bypass"><i class="fa-brands fa-weibo fa-fw" aria-hidden=true></i></a>
+</span>
+</div>
+</div>
+</div>
+<div class=post-info-more>
+<section class=post-tags><i class="fa-solid fa-tags fa-fw me-1" aria-hidden=true></i><a href=/tags/infosec/ class=post-tag>infosec</a><a href=/tags/fileupload/ class=post-tag>fileupload</a><a href=/tags/php/ class=post-tag>php</a></section>
+<section>
+<span><a href=javascript:void(0); onclick=window.history.back()>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span>
+</section>
+</div>
+<div class=post-nav><a href=/posts/bug-bounty-2022/ class=post-nav-item rel=prev title="Reflection on my Bug Bounty Journey 2022"><i class="fa-solid fa-angle-left fa-fw" aria-hidden=true></i>Reflection on my Bug Bounty Journey 2022</a>
+<a href=/posts/tale-of-2/ class=post-nav-item rel=next title="Chaining the tale of 2 Vulnerabilities">Chaining the tale of 2 Vulnerabilities<i class="fa-solid fa-angle-right fa-fw" aria-hidden=true></i></a></div>
+</div>
+</article></main><footer class=footer>
+<div class=footer-container><div class="footer-line copyright" itemscope itemtype=http://schema.org/CreativeWork><i class="fa-regular fa-copyright fa-fw" aria-hidden=true></i>
+<span itemprop=copyrightYear>2022 - 2023</span><span class=author itemprop=copyrightHolder>
+<a href=/></a></span></div><div class="footer-line statistics"><span class=site-time title="Website running ..."><i class="fa-solid fa-heartbeat fa-fw animate-icon" aria-hidden=true></i><span class="run-times ms-1">Website running ...</span></span></div></div>
+</footer></div><div class=widgets><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role=button aria-label="Back to Top"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden=true></i><span class="variant-numeric d-none">0%</span>
+</div></div><div id=mask></div><noscript>
+<div class=noscript-warning>Theme FixIt works best with JavaScript enabled.</div>
+</noscript>
+</div><link rel=stylesheet href=/lib/lightgallery/css/lightgallery-bundle.min.css><link rel=stylesheet href=/lib/cookieconsent/cookieconsent.min.css><link rel=stylesheet href=/lib/pace/themes/green/pace-theme-minimal.css><script src=/lib/autocomplete/autocomplete.min.js defer></script><script src=/lib/lunr/lunr.min.js defer></script><script src=/lib/lazysizes/lazysizes.min.js async defer></script><script src=/lib/twemoji/twemoji.min.js defer></script><script src=/lib/lightgallery/lightgallery.min.js defer></script><script src=/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js defer></script><script src=/lib/lightgallery/plugins/zoom/lg-zoom.min.js defer></script><script src=/lib/sharer/sharer.min.js async defer></script><script src=/lib/typeit/index.umd.js defer></script><script src=/lib/cookieconsent/cookieconsent.min.js defer></script><script src=/lib/pace/pace.min.js async defer></script><script>window.config={code:{copyTitle:"Copy to clipboard",editLockTitle:"Lock editable code block",editUnLockTitle:"Unlock editable code block",editable:!0,maxShownLines:10},comment:{enable:!1},cookieconsent:{content:{dismiss:"Got it!",link:"Learn more",message:"This website uses Cookies to improve your experience."},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},data:{"typeit-header-desktop":"[root@0xSh1v4:]","typeit-header-title-mobile":"[root@0xSh1v4:]"},lightgallery:!0,search:{highlightTag:"em",lunrIndexURL:"/index.json",maxResultLength:10,noResultsFound:"No results found",snippetLength:30,type:"lunr"},twemoji:!0,typeit:{cursorChar:"|",cursorSpeed:1e3,data:{"typeit-header-desktop":["typeit-header-desktop"],"typeit-header-title-mobile":["typeit-header-title-mobile"]},duration:-1,speed:100}}</script><script src=/js/theme.min.js defer></script></body>
+</html>
