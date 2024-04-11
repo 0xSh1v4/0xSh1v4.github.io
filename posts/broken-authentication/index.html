@@ -1,0 +1,284 @@
+<!doctype html><html itemscope itemtype=http://schema.org/WebPage lang=en>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2">
+<meta name=robots content="noodp">
+<title>Cracking the Code: Unveiling the Forgotten Password Flaw leads to ATO - 0xSh1v4 Blog</title><meta name=author content>
+<meta name=author-link content>
+<meta name=description content="Introduction In the domain of cybersecurity, uncovering vulnerabilities is a critical aspect of maintaining digital security. Recently, a significant flaw was identified within the &ldquo;Forgot Password&rdquo; feature in one of my private bug bounty program, specifically centered around its password reset functionality. This vulnerability, residing in the process of handling reset requests, exposed sensitive information by including new passwords in API response payloads. This breach in standard security practices posed a severe risk, allowing attackers to potentially reset any user&rsquo;s password and gain unauthorized access to their accounts."><meta name=keywords content="bug-bounty,synack,logs,email,password"><meta itemprop=name content="Cracking the Code: Unveiling the Forgotten Password Flaw leads to ATO">
+<meta itemprop=description content="Introduction In the domain of cybersecurity, uncovering vulnerabilities is a critical aspect of maintaining digital security. Recently, a significant flaw was identified within the &ldquo;Forgot Password&rdquo; feature in one of my private bug bounty program, specifically centered around its password reset functionality. This vulnerability, residing in the process of handling reset requests, exposed sensitive information by including new passwords in API response payloads. This breach in standard security practices posed a severe risk, allowing attackers to potentially reset any user&rsquo;s password and gain unauthorized access to their accounts."><meta itemprop=datePublished content="2024-04-11T03:26:27+01:00">
+<meta itemprop=dateModified content="2024-04-11T03:26:27+01:00">
+<meta itemprop=wordCount content="701">
+<meta itemprop=keywords content="infosec,bugbounty,synack,forgot-password,email,password,"><meta property="og:title" content="Cracking the Code: Unveiling the Forgotten Password Flaw leads to ATO">
+<meta property="og:description" content="Introduction In the domain of cybersecurity, uncovering vulnerabilities is a critical aspect of maintaining digital security. Recently, a significant flaw was identified within the &ldquo;Forgot Password&rdquo; feature in one of my private bug bounty program, specifically centered around its password reset functionality. This vulnerability, residing in the process of handling reset requests, exposed sensitive information by including new passwords in API response payloads. This breach in standard security practices posed a severe risk, allowing attackers to potentially reset any user&rsquo;s password and gain unauthorized access to their accounts.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://0xsh1v4.github.io/posts/broken-authentication/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2024-04-11T03:26:27+01:00">
+<meta property="article:modified_time" content="2024-04-11T03:26:27+01:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Cracking the Code: Unveiling the Forgotten Password Flaw leads to ATO">
+<meta name=twitter:description content="Introduction In the domain of cybersecurity, uncovering vulnerabilities is a critical aspect of maintaining digital security. Recently, a significant flaw was identified within the &ldquo;Forgot Password&rdquo; feature in one of my private bug bounty program, specifically centered around its password reset functionality. This vulnerability, residing in the process of handling reset requests, exposed sensitive information by including new passwords in API response payloads. This breach in standard security practices posed a severe risk, allowing attackers to potentially reset any user&rsquo;s password and gain unauthorized access to their accounts.">
+<meta name=application-name content="0xSh1v4">
+<meta name=apple-mobile-web-app-title content="0xSh1v4"><meta name=theme-color data-light=#f8f8f8 data-dark=#252627 content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=canonical href=https://0xsh1v4.github.io/posts/broken-authentication/><link rel=prev href=https://0xsh1v4.github.io/posts/symphony-stacktraces/><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Cracking the Code: Unveiling the Forgotten Password Flaw leads to ATO","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/0xsh1v4.github.io\/posts\/broken-authentication\/"},"genre":"posts","keywords":"infosec, bugbounty, synack, forgot-password, email, password","wordcount":701,"url":"https:\/\/0xsh1v4.github.io\/posts\/broken-authentication\/","datePublished":"2024-04-11T03:26:27+01:00","dateModified":"2024-04-11T03:26:27+01:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"Siva Rajendran"},"description":""}</script></head>
+<body data-header-desktop=sticky data-header-mobile=auto><script>(window.localStorage?.getItem('theme')?localStorage.getItem('theme')==='dark':'auto'==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:'auto'==='dark')&&document.body.setAttribute('data-theme','dark')</script><div class=wrapper><header class="desktop animate__faster" id=header-desktop>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="0xSh1v4 Blog"><img class="lazyload logo" src=/svg/loading.min.svg data-src="https://en.gravatar.com/userimage/231079049/88f85f4c7b814b0c5901d48c6bd25e6b.png?size=200" data-srcset="https://en.gravatar.com/userimage/231079049/88f85f4c7b814b0c5901d48c6bd25e6b.png?size=200, https://en.gravatar.com/userimage/231079049/88f85f4c7b814b0c5901d48c6bd25e6b.png?size=200 1.5x, https://en.gravatar.com/userimage/231079049/88f85f4c7b814b0c5901d48c6bd25e6b.png?size=200 2x" data-sizes=auto alt="0xSh1v4 Blog" title="0xSh1v4 Blog"><span id=typeit-header-desktop class=typeit></span></a><span class=header-subtitle></span></div>
+<nav>
+<ul class=menu><li class=menu-item>
+<a class=menu-link href=/posts/><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden=true></i> Posts</a></li><li class=menu-item>
+<a class=menu-link href=/tags/><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden=true></i> Tags</a></li><li class="menu-item active has-children">
+<a class=menu-link href=/>Bug-Bounty</a><i class="dropdown-icon fa-solid fa-chevron-down" aria-hidden=true></i>
+<ul class=sub-menu>
+<li class=menu-item>
+<a class=menu-link href=/posts/bug-bounty-2022/ title="Reflection on Bug Bounty Journey 2022"><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> Bug-Bounty 2022</a>
+</li><li class="menu-item active">
+<a class=menu-link href=/posts/broken-authentication/ title="Cracking the Code: Unveiling the Forgotten Password Flaw leads to ATO"><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> Forgot-Password</a>
+</li><li class=menu-item>
+<a class=menu-link href=/posts/symphony-stacktraces/ title="Unveiling Hidden Dangers: An Unprotected Symfony Profiler Endpoint Leads to Critical Exposure"><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> Symphony profiler</a>
+</li><li class=menu-item>
+<a class=menu-link href=/posts/tale-of-2/ title="A tale of 2 Vulnerabilities"><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> Tale of 2</a>
+</li></ul></li><li class="menu-item has-children">
+<a class=menu-link href=/>Certifications</a><i class="dropdown-icon fa-solid fa-chevron-down" aria-hidden=true></i>
+<ul class=sub-menu>
+<li class=menu-item>
+<a class=menu-link href=/posts/oscp/ title="Offensive Security Certified Professional Guide (OSCP)"><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> OSCP</a>
+</li></ul></li><li class="menu-item has-children">
+<a class=menu-link href=/>Web</a><i class="dropdown-icon fa-solid fa-chevron-down" aria-hidden=true></i>
+<ul class=sub-menu>
+<li class=menu-item>
+<a class=menu-link href=/posts/php-file-upload-bypass/ title="File upload bypass using .htaccess"><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> File upload bypass</a>
+</li></ul></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop>
+<input type=text placeholder="Search here" id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=Search>
+<i class="fa-solid fa-search fa-fw" aria-hidden=true></i>
+</a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=Clear>
+<i class="fa-solid fa-times-circle fa-fw" aria-hidden=true></i>
+</a>
+<span class="search-button search-loading" id=search-loading-desktop>
+<i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden=true></i>
+</span>
+</li><li class="menu-item theme-switch" title="Switch Theme">
+<i class="fa-solid fa-adjust fa-fw" aria-hidden=true></i>
+</li>
+</ul>
+</nav>
+</div>
+</header><header class="mobile animate__faster" id=header-mobile>
+<div class=header-container>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="0xSh1v4 Blog"><img class="lazyload logo" src=/svg/loading.min.svg data-src="https://en.gravatar.com/userimage/231079049/88f85f4c7b814b0c5901d48c6bd25e6b.png?size=200" data-srcset="https://en.gravatar.com/userimage/231079049/88f85f4c7b814b0c5901d48c6bd25e6b.png?size=200, https://en.gravatar.com/userimage/231079049/88f85f4c7b814b0c5901d48c6bd25e6b.png?size=200 1.5x, https://en.gravatar.com/userimage/231079049/88f85f4c7b814b0c5901d48c6bd25e6b.png?size=200 2x" data-sizes=auto alt="https://en.gravatar.com/userimage/231079049/88f85f4c7b814b0c5901d48c6bd25e6b.png?size=200" title="https://en.gravatar.com/userimage/231079049/88f85f4c7b814b0c5901d48c6bd25e6b.png?size=200"><span id=typeit-header-title-mobile class=typeit></span></a><span class=header-subtitle></span></div>
+<div class=menu-toggle id=menu-toggle-mobile>
+<span></span><span></span><span></span>
+</div>
+</div>
+<nav>
+<ul class=menu id=menu-mobile><li class=search-wrapper>
+<div class="search mobile" id=search-mobile>
+<input type=text placeholder="Search here" id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=Search>
+<i class="fa-solid fa-search fa-fw" aria-hidden=true></i>
+</a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=Clear>
+<i class="fa-solid fa-times-circle fa-fw" aria-hidden=true></i>
+</a>
+<span class="search-button search-loading" id=search-loading-mobile>
+<i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden=true></i>
+</span>
+</div>
+<a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
+Cancel
+</a>
+</li><li class=menu-item><a class=menu-link href=/posts/><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden=true></i> Posts</a></li><li class=menu-item><a class=menu-link href=/tags/><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden=true></i> Tags</a></li><li class="menu-item active"><span class=nested-item>
+<a class=menu-link href=/>Bug-Bounty</a>
+<i class="dropdown-icon fa-solid fa-chevron-right" aria-hidden=true></i>
+</span>
+<ul class=sub-menu>
+<li class=menu-item>
+<a class=menu-link href=/posts/bug-bounty-2022/ title="Reflection on Bug Bounty Journey 2022"><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> Bug-Bounty 2022</a>
+</li><li class="menu-item active">
+<a class=menu-link href=/posts/broken-authentication/ title="Cracking the Code: Unveiling the Forgotten Password Flaw leads to ATO"><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> Forgot-Password</a>
+</li><li class=menu-item>
+<a class=menu-link href=/posts/symphony-stacktraces/ title="Unveiling Hidden Dangers: An Unprotected Symfony Profiler Endpoint Leads to Critical Exposure"><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> Symphony profiler</a>
+</li><li class=menu-item>
+<a class=menu-link href=/posts/tale-of-2/ title="A tale of 2 Vulnerabilities"><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> Tale of 2</a>
+</li></ul></li><li class=menu-item><span class=nested-item>
+<a class=menu-link href=/>Certifications</a>
+<i class="dropdown-icon fa-solid fa-chevron-right" aria-hidden=true></i>
+</span>
+<ul class=sub-menu>
+<li class=menu-item>
+<a class=menu-link href=/posts/oscp/ title="Offensive Security Certified Professional Guide (OSCP)"><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> OSCP</a>
+</li></ul></li><li class=menu-item><span class=nested-item>
+<a class=menu-link href=/>Web</a>
+<i class="dropdown-icon fa-solid fa-chevron-right" aria-hidden=true></i>
+</span>
+<ul class=sub-menu>
+<li class=menu-item>
+<a class=menu-link href=/posts/php-file-upload-bypass/ title="File upload bypass using .htaccess"><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> File upload bypass</a>
+</li></ul></li><li class="menu-item theme-switch" title="Switch Theme">
+<i class="fa-solid fa-adjust fa-fw" aria-hidden=true></i>
+</li></ul>
+</nav>
+</div>
+</header><div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div>
+</div>
+<div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div>
+</div><main class=container data-page-style=normal><aside class=toc id=toc-auto><h2 class=toc-title>Contents&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden=true></i></h2>
+<div class=toc-content id=toc-content-auto></div></aside>
+<aside class=aside-custom>
+</aside>
+<article class="page single">
+<div class=header><h1 class="single-title animate__animated animate__flipInX">
+<span title=Repost class=icon-repost><i class="fa-solid fa-share fa-fw" aria-hidden=true></i></span><span>Cracking the Code: Unveiling the Forgotten Password Flaw leads to ATO</span>
+</h1><p class="single-subtitle animate__animated animate__fadeIn">Synack Bug-bounty Program</p></div><div class=post-meta>
+<div class=post-meta-line><span class=post-author><span class=author><i class="fa-solid fa-user-circle" aria-hidden=true></i>
+Siva Rajendran</span></span>
+<span class=post-category>included in <a href=/categories/infosec/><i class="fa-regular fa-folder fa-fw" aria-hidden=true></i> Infosec</a>&ensp;<a href=/categories/bugbounty/><i class="fa-regular fa-folder fa-fw" aria-hidden=true></i> Bugbounty</a>&ensp;<a href=/categories/synack/><i class="fa-regular fa-folder fa-fw" aria-hidden=true></i> Synack</a></span></div>
+<div class=post-meta-line><span title="2024-04-11 03:26:27"><i class="fa-regular fa-calendar-alt fa-fw" aria-hidden=true></i>&nbsp;<time datetime=2024-04-11>2024-04-11</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw" aria-hidden=true></i> 701 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw" aria-hidden=true></i> 4 minutes</span>&nbsp;</div>
+</div><div class="details toc" id=toc-static data-kept=false>
+<div class="details-summary toc-title">
+<span>Contents</span>
+<span><i class="details-icon fa-solid fa-angle-right" aria-hidden=true></i></span>
+</div>
+<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li><a href=#introduction>Introduction</a></li>
+<li><a href=#discovery>Discovery</a></li>
+<li><a href=#addressing-the-vulnerability>Addressing the Vulnerability</a></li>
+<li><a href=#lessons-learned>Lessons Learned</a></li>
+</ul>
+</li>
+</ul>
+</nav></div>
+</div><div class=content id=content><h3 id=introduction>Introduction</h3>
+<p>In the domain of cybersecurity, uncovering vulnerabilities is a critical aspect of maintaining digital security. Recently, a significant flaw was identified within the &ldquo;Forgot Password&rdquo; feature in one of my private bug bounty program, specifically centered around its password reset functionality. This vulnerability, residing in the process of handling reset requests, exposed sensitive information by including new passwords in API response payloads. This breach in standard security practices posed a severe risk, allowing attackers to potentially reset any user&rsquo;s password and gain unauthorized access to their accounts. This blog post delves into the technical details of this vulnerability, its implications, and the lessons learned from its discovery.</p>
+<h3 id=discovery>Discovery</h3>
+<p>The application, hosted at a specific IP address (redacted for security), initially appeared to be a standard API endpoint. However, upon further examination, it became evident that an API endpoint documentation was publicly accessible without any form of authentication, accessible at <strong>https://[redacted]/help</strong>. It was noted that unauthenticated testing was within the scope, allowing only registration and password flow to be tested. Given this limitation, I focused on testing the registration and password flow implementation.</p>
+<p>Although there were several registration endpoints available, I chose <strong><a href=https://api.redacted.com/api/Account/RegisterMobileUser target=_blank rel="external nofollow noopener noreferrer">https://api.redacted.com/api/Account/RegisterMobileUser</a></strong>. Unfortunately, the parameters were not specified in the documentation; only the URLs were provided without details on the underlying endpoints.</p>
+<p>My initial attempt with email, password, and confirm password resulted in a 500 status code, indicating missing parameters. Despite trying various parameters, I was unable to identify the correct ones.</p>
+<p>Subsequently, I decided to utilize the parameter discovery tool <a href=https://github.com/s0md3v/Arjun target=_blank rel="external nofollow noopener noreferrer">ARJUN</a> to streamline the process.</p>
+<pre tabindex=0><code>arjun -u https://api.redacted.com/api/Account/RegisterMobileUser        
+    _
+   /_| _ '
+  (  |/ /(//) v2.2.2
+      _/      
+
+[*] Probing the target for stability
+[*] Analysing HTTP response for anomalies
+[*] Analysing HTTP response for potential parameter names
+[*] Logicforcing the URL endpoint
+[✓] parameter detected: Email, based on: http code
+[✓] parameter detected: PartcipantID, based on: http code
+[+] Parameters found: Email, PartcipantID
+</code></pre><p>Now that I know I only need two of these parameters to register a user within this endpoint, I discovered that the <code>ParticipantID</code> parameter only accepts UUID and it can accept any random UUID as long as the format is valid. It took some time to identify this, but now we can proceed to register an account on this endpoint.</p>
+<figure><img src=/register.png><figcaption>
+<h4>Register Mobile User</h4>
+</figcaption>
+</figure>
+<p>Now, I wanted to test the forgotpassword endpoint to observe its behavior.</p>
+<pre tabindex=0><code>POST /api/Account/ForgotPassword HTTP/1.1
+Host: api.redacted.com
+Cookie: ai_user=L5IPC|2023-12-29T17:50:48.953Z; __cf_bm=ykXVW9Avul6UVVa4C2cfx5ji82CiZCDrzxf99Rzh3o8-1705875179-1-AaCsbAiDQHDGRQPDPd6eQrhqDNtRd8YQ6e2Rrwl9RhB57ypbmBovFGZ5usk31eS/J7aXOndsQ5qmufveWRb3o40=
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:121.0) Gecko/20100101 Firefox/121.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+Accept-Language: en-GB,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Upgrade-Insecure-Requests: 1
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: none
+Sec-Fetch-User: ?1
+Te: trailers
+Connection: close
+Content-Type: application/json
+Content-Length: 37
+
+{
+&quot;Email&quot;:&quot;synackresearch+xxxxx@pm.me&quot;,
+}
+
+</code></pre><figure><img src=/forgot.png><figcaption>
+<h4>Forgot Password</h4>
+</figcaption>
+</figure>
+<p>Surprisingly, I observed a strange random token in the response, which was unexpected. Typically, when requesting a password reset, you would either receive a successful password reset message or an error. However, in this case, it was a random value.</p>
+<p>Upon further investigation, I checked my inbox and found that this random token was actually a password that had been exposed via the Forgot Password feature.</p>
+<figure><img src=/email.png><figcaption>
+<h4>Email</h4>
+</figcaption>
+</figure>
+<p>Now, this confirms the vulnerability, as using this method, I could reset any user account simply by knowing the victim&rsquo;s email address.</p>
+<p>To confirm the successful account takeover, let&rsquo;s test these credentials. A 200 response code indicates a valid login, while an invalid login results in a 401 error code.</p>
+<figure><img src=/valid.png><figcaption>
+<h4>Successful ATO</h4>
+</figcaption>
+</figure>
+<figure><img src=/invalid.png><figcaption>
+<h4>Invalid Login</h4>
+</figcaption>
+</figure>
+<h3 id=addressing-the-vulnerability>Addressing the Vulnerability</h3>
+<p>I promptly submitted my report to Synack, and they validated it within the next 1-2 hours. I&rsquo;m pleased to say that it was accepted, and I received payment happily.</p>
+<figure><img src=/pay.png><figcaption>
+<h4>P1-Critical</h4>
+</figcaption>
+</figure>
+<ul>
+<li>The client has successfully resolved the issue, and now, when requesting a password reset via the forgot password feature, It will display as follows.</li>
+</ul>
+<figure><img src=/fix.png><figcaption>
+<h4>Vulnerability got fixed</h4>
+</figcaption>
+</figure>
+<h3 id=lessons-learned>Lessons Learned</h3>
+<ul>
+<li>Testing registration and forgot password functionalities is crucial as they are often entry points for attackers.</li>
+<li>If you encounter unusual behavior, such as a 500 Status Code during registration, it&rsquo;s essential to delve deeper into the issue.</li>
+<li>Utilize tools like parameter discovery tools to uncover hidden parameters. In this case, identifying the ParticipantID was pivotal in discovering the vulnerability. Therefore, fuzzing and hidden parameter discovery play a crucial role in security testing.</li>
+</ul>
+<p>I hope you guys enjoyed reading my blog.</p>
+<p>Cheers!!</p>
+</div><div class=post-footer id=post-footer>
+<div class=post-info>
+<div class=post-info-line>
+<div class=post-info-mod>
+<span title="2024-04-11 03:26:27">Updated on 2024-04-11&nbsp;</span>
+</div></div>
+<div class=post-info-line>
+<div class=post-info-md></div>
+<div class=post-info-share>
+<span><a href=javascript:void(0); title="Share on Twitter" data-sharer=twitter data-url=https://0xsh1v4.github.io/posts/broken-authentication/ data-title="Cracking the Code: Unveiling the Forgotten Password Flaw leads to ATO" data-via="map[id:@0xSh1v4 prefix:https://twitter.com/ title:Twitter weight:0]" data-hashtags=infosec,bugbounty,synack,forgot-password,email,password><i class="fa-brands fa-twitter fa-fw" aria-hidden=true></i></a>
+<a href=javascript:void(0); title="Share on Linkedin" data-sharer=linkedin data-url=https://0xsh1v4.github.io/posts/broken-authentication/><i class="fa-brands fa-linkedin fa-fw" aria-hidden=true></i></a>
+<a href=javascript:void(0); title="Share on Xing" data-sharer=xing data-url=https://0xsh1v4.github.io/posts/broken-authentication/ data-title="Cracking the Code: Unveiling the Forgotten Password Flaw leads to ATO"><i class="fa-brands fa-xing fa-fw" aria-hidden=true></i></a>
+<a href=javascript:void(0); title="Share on 微博" data-sharer=weibo data-url=https://0xsh1v4.github.io/posts/broken-authentication/ data-title="Cracking the Code: Unveiling the Forgotten Password Flaw leads to ATO"><i class="fa-brands fa-weibo fa-fw" aria-hidden=true></i></a>
+</span>
+</div>
+</div>
+</div>
+<div class=post-info-more>
+<section class=post-tags><i class="fa-solid fa-tags fa-fw me-1" aria-hidden=true></i><a href=/tags/infosec/ class=post-tag>infosec</a><a href=/tags/bugbounty/ class=post-tag>bugbounty</a><a href=/tags/synack/ class=post-tag>synack</a><a href=/tags/forgot-password/ class=post-tag>forgot-password</a><a href=/tags/email/ class=post-tag>email</a><a href=/tags/password/ class=post-tag>password</a></section>
+<section>
+<span><a href=javascript:void(0); onclick=window.history.back()>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span>
+</section>
+</div>
+<div class=post-nav><a href=/posts/symphony-stacktraces/ class=post-nav-item rel=prev title="Unveiling Hidden Dangers: An Unprotected Symfony Profiler Endpoint Leads to Critical Exposure"><i class="fa-solid fa-angle-left fa-fw" aria-hidden=true></i>Unveiling Hidden Dangers: An Unprotected Symfony Profiler Endpoint Leads to Critical Exposure</a></div>
+</div>
+</article></main><footer class=footer>
+<div class=footer-container><div class="footer-line copyright" itemscope itemtype=http://schema.org/CreativeWork><i class="fa-regular fa-copyright fa-fw" aria-hidden=true></i>
+<span itemprop=copyrightYear>2022 - 2024</span><span class=author itemprop=copyrightHolder>
+<a href=/></a></span></div><div class="footer-line statistics"><span class=site-time title="Website running ..."><i class="fa-solid fa-heartbeat fa-fw animate-icon" aria-hidden=true></i><span class="run-times ms-1">Website running ...</span></span></div></div>
+</footer></div><div class=widgets><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role=button aria-label="Back to Top"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden=true></i><span class="variant-numeric d-none">0%</span>
+</div></div><div id=mask></div><noscript>
+<div class=noscript-warning>Theme FixIt works best with JavaScript enabled.</div>
+</noscript>
+</div><link rel=stylesheet href=/lib/lightgallery/css/lightgallery-bundle.min.css><link rel=stylesheet href=/lib/cookieconsent/cookieconsent.min.css><link rel=stylesheet href=/lib/pace/themes/green/pace-theme-minimal.css><script src=/lib/autocomplete/autocomplete.min.js defer></script><script src=/lib/lunr/lunr.min.js defer></script><script src=/lib/lazysizes/lazysizes.min.js async defer></script><script src=/lib/twemoji/twemoji.min.js defer></script><script src=/lib/lightgallery/lightgallery.min.js defer></script><script src=/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js defer></script><script src=/lib/lightgallery/plugins/zoom/lg-zoom.min.js defer></script><script src=/lib/sharer/sharer.min.js async defer></script><script src=/lib/typeit/index.umd.js defer></script><script src=/lib/cookieconsent/cookieconsent.min.js defer></script><script src=/lib/pace/pace.min.js async defer></script><script>window.config={code:{copyTitle:"Copy to clipboard",editLockTitle:"Lock editable code block",editUnLockTitle:"Unlock editable code block",editable:!0,maxShownLines:10},comment:{enable:!1},cookieconsent:{content:{dismiss:"Got it!",link:"Learn more",message:"This website uses Cookies to improve your experience."},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},data:{"typeit-header-desktop":"[root@0xSh1v4:]","typeit-header-title-mobile":"[root@0xSh1v4:]"},lightgallery:!0,search:{highlightTag:"em",lunrIndexURL:"/index.json",maxResultLength:10,noResultsFound:"No results found",snippetLength:30,type:"lunr"},twemoji:!0,typeit:{cursorChar:"|",cursorSpeed:1e3,data:{"typeit-header-desktop":["typeit-header-desktop"],"typeit-header-title-mobile":["typeit-header-title-mobile"]},duration:-1,speed:100}}</script><script src=/js/theme.min.js defer></script></body>
+</html>

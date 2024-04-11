@@ -33,6 +33,8 @@
 <li class=menu-item>
 <a class=menu-link href=/posts/bug-bounty-2022/ title="Reflection on Bug Bounty Journey 2022"><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> Bug-Bounty 2022</a>
 </li><li class=menu-item>
+<a class=menu-link href=/posts/broken-authentication/ title="Cracking the Code: Unveiling the Forgotten Password Flaw leads to ATO"><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> Forgot-Password</a>
+</li><li class=menu-item>
 <a class=menu-link href=/posts/symphony-stacktraces/ title="Unveiling Hidden Dangers: An Unprotected Symfony Profiler Endpoint Leads to Critical Exposure"><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> Symphony profiler</a>
 </li><li class=menu-item>
 <a class=menu-link href=/posts/tale-of-2/ title="A tale of 2 Vulnerabilities"><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> Tale of 2</a>
@@ -97,6 +99,8 @@ Cancel
 <li class=menu-item>
 <a class=menu-link href=/posts/bug-bounty-2022/ title="Reflection on Bug Bounty Journey 2022"><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> Bug-Bounty 2022</a>
 </li><li class=menu-item>
+<a class=menu-link href=/posts/broken-authentication/ title="Cracking the Code: Unveiling the Forgotten Password Flaw leads to ATO"><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> Forgot-Password</a>
+</li><li class=menu-item>
 <a class=menu-link href=/posts/symphony-stacktraces/ title="Unveiling Hidden Dangers: An Unprotected Symfony Profiler Endpoint Leads to Critical Exposure"><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> Symphony profiler</a>
 </li><li class=menu-item>
 <a class=menu-link href=/posts/tale-of-2/ title="A tale of 2 Vulnerabilities"><i class="fa-brands fa-readme fa-fw fa-sm" aria-hidden=true></i> Tale of 2</a>
@@ -131,6 +135,12 @@ Cancel
 </a><a href=https://app.hackthebox.com/profile/167190 title="Hack The Box" target=_blank rel="external nofollow noopener noreferrer me"><i data-svg-src=/lib/simple-icons/icons/hackthebox.min.svg aria-hidden=true></i>
 </a><a href=https://tryhackme.com/p/Whiterose title=TryHackMe target=_blank rel="external nofollow noopener noreferrer me"><i data-svg-src=/lib/simple-icons/icons/tryhackme.min.svg aria-hidden=true></i>
 </a></div></div>
+<article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
+<span title=Repost class=icon-repost><i class="fa-solid fa-share fa-fw" aria-hidden=true></i></span><a href=/posts/broken-authentication/>Cracking the Code: Unveiling the Forgotten Password Flaw leads to ATO</a>
+</h1><div class=post-meta><span class=post-author><span class=author><i class="fa-solid fa-user-circle" aria-hidden=true></i>
+Siva Rajendran</span></span>&nbsp;<span class=post-publish title="2024-04-11 03:26:27">published on <time datetime=2024-04-11>2024-04-11</time></span>&nbsp;<span class=post-category>included in <a href=/categories/infosec/><i class="fa-regular fa-folder fa-fw" aria-hidden=true></i> Infosec</a>&ensp;<a href=/categories/bugbounty/><i class="fa-regular fa-folder fa-fw" aria-hidden=true></i> Bugbounty</a>&ensp;<a href=/categories/synack/><i class="fa-regular fa-folder fa-fw" aria-hidden=true></i> Synack</a></span></div><div class=content>Introduction In the domain of cybersecurity, uncovering vulnerabilities is a critical aspect of maintaining digital security. Recently, a significant flaw was identified within the &ldquo;Forgot Password&rdquo; feature in one of my private bug bounty program, specifically centered around its password reset functionality. This vulnerability, residing in the process of handling reset requests, exposed sensitive information by including new passwords in API response payloads. This breach in standard security practices posed a severe risk, allowing attackers to potentially reset any user&rsquo;s password and gain unauthorized access to their accounts.</div><div class=post-footer>
+<a href=/posts/broken-authentication/>Read More</a><div class=post-tags><i class="fa-solid fa-tags fa-fw me-1" aria-hidden=true></i><a href=/tags/infosec/ class=post-tag>infosec</a><a href=/tags/bugbounty/ class=post-tag>bugbounty</a><a href=/tags/synack/ class=post-tag>synack</a><a href=/tags/forgot-password/ class=post-tag>forgot-password</a><a href=/tags/email/ class=post-tag>email</a><a href=/tags/password/ class=post-tag>password</a></div></div>
+</article>
 <article class="single summary" itemscope itemtype=http://schema.org/Article><h1 class=single-title itemprop="name headline">
 <span title=Repost class=icon-repost><i class="fa-solid fa-share fa-fw" aria-hidden=true></i></span><a href=/posts/symphony-stacktraces/>Unveiling Hidden Dangers: An Unprotected Symfony Profiler Endpoint Leads to Critical Exposure</a>
 </h1><div class=post-meta><span class=post-author><span class=author><i class="fa-solid fa-user-circle" aria-hidden=true></i>
@@ -169,7 +179,7 @@ Siva Rajendran</span></span>&nbsp;<span class=post-publish title="2022-12-26 03:
 </article>
 </div></main><footer class=footer>
 <div class=footer-container><div class="footer-line copyright" itemscope itemtype=http://schema.org/CreativeWork><i class="fa-regular fa-copyright fa-fw" aria-hidden=true></i>
-<span itemprop=copyrightYear>2022 - 2023</span><span class=author itemprop=copyrightHolder>
+<span itemprop=copyrightYear>2022 - 2024</span><span class=author itemprop=copyrightHolder>
 <a href=/></a></span></div><div class="footer-line statistics"><span class=site-time title="Website running ..."><i class="fa-solid fa-heartbeat fa-fw animate-icon" aria-hidden=true></i><span class="run-times ms-1">Website running ...</span></span></div></div>
 </footer></div><div class=widgets><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role=button aria-label="Back to Top"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden=true></i><span class="variant-numeric d-none">0%</span>
 </div></div><div id=mask></div><noscript>
